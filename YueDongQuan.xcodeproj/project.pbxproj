@@ -12,6 +12,14 @@
 		5C019B401D92708900BAAAC1 /* SignHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C019B3F1D92708900BAAAC1 /* SignHeaderView.swift */; };
 		5C072B601D8F8D2500420F6D /* YoYoAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C072B5F1D8F8D2500420F6D /* YoYoAlertView.swift */; };
 		5C072B621D8F9C6C00420F6D /* EditorFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C072B611D8F9C6C00420F6D /* EditorFieldViewController.swift */; };
+		5C10E1261D9B59C6008AFAAF /* HKFPostJoinTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C10E1251D9B59C6008AFAAF /* HKFPostJoinTeamVC.swift */; };
+		5C10E1281D9B5B34008AFAAF /* HKFPostActivityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C10E1271D9B5B34008AFAAF /* HKFPostActivityVC.swift */; };
+		5C24BB6B1D9A48A200A6D25F /* HKFPostImageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C24BB6A1D9A48A200A6D25F /* HKFPostImageVC.m */; };
+		5C24BB6F1D9A4BEB00A6D25F /* CustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C24BB6E1D9A4BEA00A6D25F /* CustomTextField.m */; };
+		5C24BB721D9A5C9C00A6D25F /* HKFPostVideoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C24BB711D9A5C9C00A6D25F /* HKFPostVideoVC.m */; };
+		5C24BB741D9A5F4400A6D25F /* HKFPostRecruitmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C24BB731D9A5F4400A6D25F /* HKFPostRecruitmentVC.swift */; };
+		5C24BB771D9A709100A6D25F /* BRPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C24BB761D9A709100A6D25F /* BRPlaceholderTextView.m */; };
+		5C24BB791D9A7D2800A6D25F /* HKFPostMatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C24BB781D9A7D2800A6D25F /* HKFPostMatchVC.swift */; };
 		5C2A955C1D8D1C56006D1462 /* dataTest.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 5C2A955B1D8D1C56006D1462 /* dataTest.geojson */; };
 		5C2A956C1D8D86B2006D1462 /* CellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2A956B1D8D86B2006D1462 /* CellModel.m */; };
 		5C2A956F1D8D86C3006D1462 /* DynamicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2A956E1D8D86C3006D1462 /* DynamicCell.m */; };
@@ -37,14 +45,11 @@
 		5CA4EA3C1D8E96B5001A8E8D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CA4EA3B1D8E96B5001A8E8D /* MapKit.framework */; };
 		5CA4EA3E1D8EC59A001A8E8D /* FieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA4EA3D1D8EC59A001A8E8D /* FieldViewController.swift */; };
 		5CA4EA401D8EC5EE001A8E8D /* FieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA4EA3F1D8EC5EE001A8E8D /* FieldCell.swift */; };
-		5CBAA8EA1D98BA1C000E21E9 /* PostVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAA8E91D98BA1C000E21E9 /* PostVideoController.swift */; };
 		5CBAA8EF1D99011F000E21E9 /* LxGridViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAA8EC1D99011F000E21E9 /* LxGridViewFlowLayout.m */; };
 		5CBAA8F01D99011F000E21E9 /* TZTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAA8EE1D99011F000E21E9 /* TZTestCell.m */; };
 		5CBAA8F21D9908B1000E21E9 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBAA8F11D9908B1000E21E9 /* AssetsLibrary.framework */; };
 		5CD980EA1D9615FF007828E2 /* CircleAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD980E91D9615FF007828E2 /* CircleAnimation.swift */; };
 		5CD981061D96546A007828E2 /* XTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD981051D96546A007828E2 /* XTimer.m */; };
-		5CD981081D965F73007828E2 /* PostImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD981071D965F73007828E2 /* PostImageController.swift */; };
-		5CD9810A1D966C4A007828E2 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD981091D966C4A007828E2 /* CustomTextField.swift */; };
 		5CE4A7E91D8AC1ED00F25CF6 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE4A7E81D8AC1ED00F25CF6 /* HMSegmentedControl.m */; };
 		BF071EF61D9A0D5F000551F7 /* AllNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF071EDA1D9A0D5F000551F7 /* AllNoticeViewController.swift */; };
 		BF071EF71D9A0D5F000551F7 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF071EDB1D9A0D5F000551F7 /* ChatViewController.swift */; };
@@ -115,6 +120,19 @@
 		5C019B3F1D92708900BAAAC1 /* SignHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignHeaderView.swift; sourceTree = "<group>"; };
 		5C072B5F1D8F8D2500420F6D /* YoYoAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoYoAlertView.swift; sourceTree = "<group>"; };
 		5C072B611D8F9C6C00420F6D /* EditorFieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorFieldViewController.swift; sourceTree = "<group>"; };
+		5C10E1251D9B59C6008AFAAF /* HKFPostJoinTeamVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HKFPostJoinTeamVC.swift; sourceTree = "<group>"; };
+		5C10E1271D9B5B34008AFAAF /* HKFPostActivityVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HKFPostActivityVC.swift; sourceTree = "<group>"; };
+		5C24BB691D9A48A200A6D25F /* HKFPostImageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKFPostImageVC.h; sourceTree = "<group>"; };
+		5C24BB6A1D9A48A200A6D25F /* HKFPostImageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKFPostImageVC.m; sourceTree = "<group>"; };
+		5C24BB6C1D9A492500A6D25F /* YDQPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDQPrefixHeader.pch; sourceTree = "<group>"; };
+		5C24BB6D1D9A4BEA00A6D25F /* CustomTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTextField.h; sourceTree = "<group>"; };
+		5C24BB6E1D9A4BEA00A6D25F /* CustomTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTextField.m; sourceTree = "<group>"; };
+		5C24BB701D9A5C9C00A6D25F /* HKFPostVideoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKFPostVideoVC.h; sourceTree = "<group>"; };
+		5C24BB711D9A5C9C00A6D25F /* HKFPostVideoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKFPostVideoVC.m; sourceTree = "<group>"; };
+		5C24BB731D9A5F4400A6D25F /* HKFPostRecruitmentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HKFPostRecruitmentVC.swift; sourceTree = "<group>"; };
+		5C24BB751D9A709100A6D25F /* BRPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRPlaceholderTextView.h; sourceTree = "<group>"; };
+		5C24BB761D9A709100A6D25F /* BRPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRPlaceholderTextView.m; sourceTree = "<group>"; };
+		5C24BB781D9A7D2800A6D25F /* HKFPostMatchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HKFPostMatchVC.swift; sourceTree = "<group>"; };
 		5C2A955B1D8D1C56006D1462 /* dataTest.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dataTest.geojson; sourceTree = "<group>"; };
 		5C2A956A1D8D86B2006D1462 /* CellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellModel.h; sourceTree = "<group>"; };
 		5C2A956B1D8D86B2006D1462 /* CellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellModel.m; sourceTree = "<group>"; };
@@ -153,7 +171,6 @@
 		5CA4EA3B1D8E96B5001A8E8D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		5CA4EA3D1D8EC59A001A8E8D /* FieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldViewController.swift; sourceTree = "<group>"; };
 		5CA4EA3F1D8EC5EE001A8E8D /* FieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldCell.swift; sourceTree = "<group>"; };
-		5CBAA8E91D98BA1C000E21E9 /* PostVideoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostVideoController.swift; sourceTree = "<group>"; };
 		5CBAA8EB1D99011F000E21E9 /* LxGridViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LxGridViewFlowLayout.h; sourceTree = "<group>"; };
 		5CBAA8EC1D99011F000E21E9 /* LxGridViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LxGridViewFlowLayout.m; sourceTree = "<group>"; };
 		5CBAA8ED1D99011F000E21E9 /* TZTestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZTestCell.h; sourceTree = "<group>"; };
@@ -162,12 +179,9 @@
 		5CD980E91D9615FF007828E2 /* CircleAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleAnimation.swift; sourceTree = "<group>"; };
 		5CD981041D96546A007828E2 /* XTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTimer.h; sourceTree = "<group>"; };
 		5CD981051D96546A007828E2 /* XTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTimer.m; sourceTree = "<group>"; };
-		5CD981071D965F73007828E2 /* PostImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImageController.swift; sourceTree = "<group>"; };
-		5CD981091D966C4A007828E2 /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		5CE4A7E71D8AC1ED00F25CF6 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		5CE4A7E81D8AC1ED00F25CF6 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		8F2702782B36855A0793C813 /* Pods-YueDongQuan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YueDongQuan.release.xcconfig"; path = "Pods/Target Support Files/Pods-YueDongQuan/Pods-YueDongQuan.release.xcconfig"; sourceTree = "<group>"; };
-		BF071ED81D9A0CFF000551F7 /* YDQPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YDQPrefixHeader.pch; path = ../../YDQPrefixHeader.pch; sourceTree = "<group>"; };
 		BF071EDA1D9A0D5F000551F7 /* AllNoticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllNoticeViewController.swift; sourceTree = "<group>"; };
 		BF071EDB1D9A0D5F000551F7 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		BF071EDC1D9A0D5F000551F7 /* MyQuanZiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyQuanZiViewController.swift; sourceTree = "<group>"; };
@@ -487,8 +501,10 @@
 			isa = PBXGroup;
 			children = (
 				BFC65D491D86A14F004E7E99 /* MiddleViewController.swift */,
-				5CD981071D965F73007828E2 /* PostImageController.swift */,
-				5CBAA8E91D98BA1C000E21E9 /* PostVideoController.swift */,
+				5C24BB731D9A5F4400A6D25F /* HKFPostRecruitmentVC.swift */,
+				5C24BB781D9A7D2800A6D25F /* HKFPostMatchVC.swift */,
+				5C10E1251D9B59C6008AFAAF /* HKFPostJoinTeamVC.swift */,
+				5C10E1271D9B5B34008AFAAF /* HKFPostActivityVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -503,11 +519,18 @@
 		BFC65D351D86A05D004E7E99 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5C24BB691D9A48A200A6D25F /* HKFPostImageVC.h */,
+				5C24BB6A1D9A48A200A6D25F /* HKFPostImageVC.m */,
+				5C24BB701D9A5C9C00A6D25F /* HKFPostVideoVC.h */,
+				5C24BB711D9A5C9C00A6D25F /* HKFPostVideoVC.m */,
 				5CBAA8EB1D99011F000E21E9 /* LxGridViewFlowLayout.h */,
 				5CBAA8EC1D99011F000E21E9 /* LxGridViewFlowLayout.m */,
 				5CBAA8ED1D99011F000E21E9 /* TZTestCell.h */,
 				5CBAA8EE1D99011F000E21E9 /* TZTestCell.m */,
-				5CD981091D966C4A007828E2 /* CustomTextField.swift */,
+				5C24BB6D1D9A4BEA00A6D25F /* CustomTextField.h */,
+				5C24BB6E1D9A4BEA00A6D25F /* CustomTextField.m */,
+				5C24BB751D9A709100A6D25F /* BRPlaceholderTextView.h */,
+				5C24BB761D9A709100A6D25F /* BRPlaceholderTextView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -589,7 +612,6 @@
 		BFC65D431D86A0C6004E7E99 /* 配置文件 */ = {
 			isa = PBXGroup;
 			children = (
-				BF071ED81D9A0CFF000551F7 /* YDQPrefixHeader.pch */,
 				BFC65D451D86A0F9004E7E99 /* MainTabBarViewController.swift */,
 				46315AFD1D882BBC00B9D846 /* CustomNavigationBar.swift */,
 				46315AFF1D882C2300B9D846 /* Pubilc.swift */,
@@ -608,6 +630,7 @@
 				5C90F1341D8FCFA0005E16AF /* YJBadgeView.m */,
 				5C90F1351D8FCFA0005E16AF /* YJTabBarButton.h */,
 				5C90F1361D8FCFA0005E16AF /* YJTabBarButton.m */,
+				5C24BB6C1D9A492500A6D25F /* YDQPrefixHeader.pch */,
 			);
 			path = "配置文件";
 			sourceTree = "<group>";
@@ -766,6 +789,7 @@
 				5C8C3C691D927FAD00D756FF /* SignCellForHeader.swift in Sources */,
 				46315AFE1D882BBC00B9D846 /* CustomNavigationBar.swift in Sources */,
 				5C2A95761D8D86EC006D1462 /* GlobalUI.m in Sources */,
+				5C24BB791D9A7D2800A6D25F /* HKFPostMatchVC.swift in Sources */,
 				BFC65D591D86A1AF004E7E99 /* YXActionSheetButton.m in Sources */,
 				BF071EF81D9A0D5F000551F7 /* MyQuanZiViewController.swift in Sources */,
 				5C3439FE1D90E6EA0077BFDD /* SignRankingCOntroller.swift in Sources */,
@@ -788,6 +812,7 @@
 				BF071EF71D9A0D5F000551F7 /* ChatViewController.swift in Sources */,
 				5C90F1281D8FCD03005E16AF /* HKFTableBarController.swift in Sources */,
 				BF071F361D9A0D68000551F7 /* likeButton.swift in Sources */,
+				5C24BB771D9A709100A6D25F /* BRPlaceholderTextView.m in Sources */,
 				BF071F451D9A110B000551F7 /* PersonalViewController.swift in Sources */,
 				BF071EF61D9A0D5F000551F7 /* AllNoticeViewController.swift in Sources */,
 				5C072B601D8F8D2500420F6D /* YoYoAlertView.swift in Sources */,
@@ -795,18 +820,22 @@
 				5C90F1391D8FCFA0005E16AF /* UIView+Frame.m in Sources */,
 				5C90F1371D8FCFA0005E16AF /* UIBarButtonItem+YJItem.m in Sources */,
 				BFC65D5A1D86A1AF004E7E99 /* YXCustomActionSheet.m in Sources */,
+				5C24BB721D9A5C9C00A6D25F /* HKFPostVideoVC.m in Sources */,
 				5C8C3C671D92771600D756FF /* SignPersonCell.swift in Sources */,
 				BF071F411D9A0D68000551F7 /* TotalDongdouCell.swift in Sources */,
 				BF071F0C1D9A0D5F000551F7 /* MJParterDataView.swift in Sources */,
 				BF071EFE1D9A0D5F000551F7 /* SettingViewController.swift in Sources */,
+				5C10E1261D9B59C6008AFAAF /* HKFPostJoinTeamVC.swift in Sources */,
 				BF071F081D9A0D5F000551F7 /* MJHeadImageCell.swift in Sources */,
 				5C072B621D8F9C6C00420F6D /* EditorFieldViewController.swift in Sources */,
 				BF071F2F1D9A0D68000551F7 /* SetNewPasswordViewController.swift in Sources */,
+				5C24BB741D9A5F4400A6D25F /* HKFPostRecruitmentVC.swift in Sources */,
 				5CD981061D96546A007828E2 /* XTimer.m in Sources */,
+				5C10E1281D9B5B34008AFAAF /* HKFPostActivityVC.swift in Sources */,
 				5CA4EA391D8E7453001A8E8D /* UITableView+HYBCacheHeight.m in Sources */,
 				5C2A956F1D8D86C3006D1462 /* DynamicCell.m in Sources */,
 				BF071F3A1D9A0D68000551F7 /* MJDatePikerView.swift in Sources */,
-				5CD981081D965F73007828E2 /* PostImageController.swift in Sources */,
+				5C24BB6B1D9A48A200A6D25F /* HKFPostImageVC.m in Sources */,
 				BF071F051D9A0D5F000551F7 /* MHRadioButton.m in Sources */,
 				5C2A956C1D8D86B2006D1462 /* CellModel.m in Sources */,
 				BF071F431D9A10DA000551F7 /* QuanZiViewController.swift in Sources */,
@@ -835,7 +864,7 @@
 				5CD980EA1D9615FF007828E2 /* CircleAnimation.swift in Sources */,
 				BF071F0E1D9A0D5F000551F7 /* QRCodeView.swift in Sources */,
 				BF071F041D9A0D5F000551F7 /* CircleDataView.swift in Sources */,
-				5CBAA8EA1D98BA1C000E21E9 /* PostVideoController.swift in Sources */,
+				5C24BB6F1D9A4BEB00A6D25F /* CustomTextField.m in Sources */,
 				5C343A001D90E8AB0077BFDD /* SignRankCell.swift in Sources */,
 				5C343A041D91366F0077BFDD /* SignRankBtnController.swift in Sources */,
 				BFC65D1D1D869FD1004E7E99 /* AppDelegate.swift in Sources */,
@@ -849,7 +878,6 @@
 				BFC65D481D86A0F9004E7E99 /* MainViewController.swift in Sources */,
 				BF071F0B1D9A0D5F000551F7 /* MJOtherQuanZiView.swift in Sources */,
 				46315B001D882C2300B9D846 /* Pubilc.swift in Sources */,
-				5CD9810A1D966C4A007828E2 /* CustomTextField.swift in Sources */,
 				BF071EFA1D9A0D5F000551F7 /* OtherQuanZiViewController.swift in Sources */,
 				BF071F071D9A0D5F000551F7 /* MJBlacklistView.swift in Sources */,
 				BF071F0D1D9A0D5F000551F7 /* MJQRCodeView.swift in Sources */,
@@ -971,7 +999,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = /Users/HFG/Downloads/YueDongQuan/YDQPrefixHeader.pch;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/YueDongQuan/配置文件/YDQPrefixHeader.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = YueDongQuan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -996,7 +1024,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = /Users/HFG/Downloads/YueDongQuan/YDQPrefixHeader.pch;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/YueDongQuan/配置文件/YDQPrefixHeader.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = YueDongQuan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

@@ -31,7 +31,7 @@ class SignRankBtnController: UIViewController,SignHeaderViewDelegate {
         self.view.backgroundColor = UIColor.whiteColor()
         self.edgesForExtendedLayout = .None
         
-        setNav()
+        
         setUI()
         
         
@@ -51,7 +51,7 @@ class SignRankBtnController: UIViewController,SignHeaderViewDelegate {
             imgView.userInteractionEnabled = false
             
         }else{
-            imgView.image = UIImage(named: "CDEditBack.jpg")
+            imgView.image = UIImage(named: "ic_lanqiu")
             imgView.userInteractionEnabled = true
             timer.stop()
             timer.invalidate()
@@ -81,25 +81,29 @@ class SignRankBtnController: UIViewController,SignHeaderViewDelegate {
     
     func setNav(){
         
-        leftView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 44))
-        imgView = UIImageView(frame:leftView.frame)
-        imgView.image = UIImage(named: "CDEditBack.jpg")
+        
+        imgView = UIImageView(frame:CGRect(x: 0, y: 0, width: 32, height: 32))
+        imgView.image = UIImage(named: "ic_lanqiu")
         imgView.contentMode = .Center
         imgView.userInteractionEnabled = true
-        leftView.addSubview(imgView)
-        
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissVC))
         
         imgView.addGestureRecognizer(tap)
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftView)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: imgView)
         
         self.navigationController?.navigationBar.barTintColor = UIColor ( red: 0.451, green: 0.6824, blue: 0.3098, alpha: 1.0 )
-        self.navigationController?.navigationBar.tintColor = UIColor.blackColor()
+        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: 65, height: 32))
+        let searchBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
+        searchBtn.setImage(UIImage(named: "ic_search"), forState: UIControlState.Normal)
+        rightView.addSubview(searchBtn)
+        let addBtn = UIButton(frame: CGRect(x: 33, y: 0, width: 32, height: 32))
+        addBtn.setImage(UIImage(named: "ic_search"), forState: UIControlState.Normal)
+        rightView.addSubview(addBtn)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightView)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(),forBarMetrics: .Default)
-                self.navigationController?.navigationBar.shadowImage = nil
     }
     func dismissVC(){
         self.navigationController?.popViewControllerAnimated(true)
@@ -127,7 +131,7 @@ class SignRankBtnController: UIViewController,SignHeaderViewDelegate {
     
     
     override func viewWillAppear(animated: Bool) {
-
+        setNav()
 
     }
     override func viewWillDisappear(animated: Bool) {
