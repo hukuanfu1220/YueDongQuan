@@ -13,58 +13,125 @@ class FieldViewController: MainViewController ,BMKMapViewDelegate,BMKLocationSer
     var locationService : BMKLocationService?
     var scroViewContent : UIScrollView!
     var fieldTable = UITableView()
+    var weatherView = UIView()
     
     var _mapView: BMKMapView!
+    
+    var zoomCount : Float = 14
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.edgesForExtendedLayout = .None
         
-        scroViewContent = UIScrollView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: ScreenHeight))
-        scroViewContent.showsHorizontalScrollIndicator = true
-        scroViewContent.showsVerticalScrollIndicator = false
-//        scroViewContent.pagingEnabled = true
-        scroViewContent.scrollEnabled = true
-        scroViewContent.backgroundColor = UIColor(red: 234/255, green: 234/255, blue: 243/255, alpha: 1.0)
         
-        scroViewContent.contentSize = CGSize(width: ScreenWidth, height: ScreenHeight*2 )
-        self.view.addSubview(scroViewContent)
+        
         
         
         
         
         
         locationService = BMKLocationService()
+        locationService?.allowsBackgroundLocationUpdates = true
         locationService?.delegate = self
-        locationService?.distanceFilter = 10
-        locationService?.desiredAccuracy  = 100
+        locationService?.distanceFilter = kCLDistanceFilterNone
+        locationService?.desiredAccuracy  = kCLLocationAccuracyBest
         locationService?.startUserLocationService()
-        _mapView = BMKMapView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: ScreenWidth))
-        scroViewContent.addSubview(_mapView!)
         
+        _mapView = BMKMapView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: ScreenWidth*2/3))
+        
+        _mapView.userLocationVisible
         _mapView?.showsUserLocation = false;//显示定位图层
         _mapView.userTrackingMode = BMKUserTrackingModeNone
         _mapView?.mapPadding = UIEdgeInsetsMake(0, 0, 28, 0)
         _mapView?.showMapScaleBar = true
+        _mapView.zoomLevel = zoomCount
         _mapView?.mapScaleBarPosition = CGPointMake(_mapView.frame.width - 60, _mapView.frame.height - 20)
         let param = BMKLocationViewDisplayParam()
         param.accuracyCircleStrokeColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0.5)
         param.accuracyCircleFillColor = UIColor(red: 0, green: 1, blue: 0, alpha: 0.3)
         _mapView.updateLocationViewWithParam(param)
         
-        fieldTable = UITableView(frame: CGRect(x: 0, y: _mapView.frame.maxY, width: ScreenWidth, height: ScreenHeight*2 - _mapView.frame.maxY - 49 - 64), style: UITableViewStyle.Grouped)
         
-        scroViewContent.addSubview(fieldTable)
-
+        let addAndReduceView = UIView(frame: CGRect(x: CGRectGetMaxX(_mapView.frame) - 40, y: CGRectGetMaxY(_mapView.frame) - 80, width: 25, height: 51))
+        _mapView.addSubview(addAndReduceView)
+        
+        let reduceBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+        reduceBtn.backgroundColor = UIColor.blueColor()
+        reduceBtn.addTarget(self, action: #selector(reduceBtnClick), forControlEvents: UIControlEvents.TouchUpInside)
+        addAndReduceView.addSubview(reduceBtn)
+        
+        let addBtn = UIButton(frame: CGRect(x: 0, y: 26, width: 25, height: 25))
+        addBtn.backgroundColor = UIColor.brownColor()
+        addBtn.addTarget(self, action: #selector(addBtnClick), forControlEvents: UIControlEvents.TouchUpInside)
+        addAndReduceView.addSubview(addBtn)
+        
+        
+        
+        
+        
+        
+        
+        
+        fieldTable = UITableView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: ScreenHeight - 49 - 64), style: UITableViewStyle.Grouped)
+        self.view.addSubview(fieldTable)
+        fieldTable.tableHeaderView = _mapView
+        
         fieldTable.registerClass(FieldCell.self, forCellReuseIdentifier: "FieldCell")
         fieldTable.delegate = self
         fieldTable.dataSource = self
         
+        weatherView = UIView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: 30))
+        weatherView.backgroundColor = UIColor ( red: 0.7802, green: 0.7584, blue: 0.7562, alpha: 0.92 )
+        self.view.addSubview(weatherView)
+        
+        let shutBtn = UIButton(frame: CGRect(x: ScreenWidth - 30, y: 5, width: 20, height: 20))
+        shutBtn.setImage(UIImage(named: "photo_delete"), forState: UIControlState.Normal)
+        shutBtn.addTarget(self, action: #selector(dismissWeatherView), forControlEvents: UIControlEvents.TouchUpInside)
+        weatherView.addSubview(shutBtn)
         
         
     }
     
+    func dismissWeatherView(){
+        weatherView.removeFromSuperview()
+    }
+    
+    func reduceBtnClick(){
+        if zoomCount > 14 {
+            zoomCount -= 1
+        }else{
+            zoomCount = 14
+        }
+        _mapView.zoomLevel = zoomCount
+        
+    }
+    func addBtnClick(){
+        if zoomCount < 20 {
+            zoomCount += 1
+        }
+        _mapView.zoomLevel = zoomCount
+    }
+    
+    
+    func setNav(){
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_lanqiu"), style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 24.0 / 255, green: 90.0 / 255, blue: 172.0 / 255, alpha: 1.0)
+        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: 65, height: 32))
+        let searchBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
+        searchBtn.setImage(UIImage(named: "ic_search"), forState: UIControlState.Normal)
+        rightView.addSubview(searchBtn)
+        let addBtn = UIButton(frame: CGRect(x: 33, y: 0, width: 32, height: 32))
+        addBtn.setImage(UIImage(named: "ic_search"), forState: UIControlState.Normal)
+        rightView.addSubview(addBtn)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightView)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        setNav()
         _mapView?.viewWillAppear()
         _mapView?.delegate = self
     }
@@ -74,9 +141,13 @@ class FieldViewController: MainViewController ,BMKMapViewDelegate,BMKLocationSer
         _mapView?.viewWillAppear()
         _mapView?.delegate = nil
     }
+    func willStartLocatingUser() {
+        locationService?.startUserLocationService()
+    }
     
     func didUpdateUserHeading(userLocation: BMKUserLocation!) {
         NSLog("didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude)
+        _mapView.updateLocationData(userLocation)
     }
     
     func didUpdateBMKUserLocation(userLocation: BMKUserLocation!) {

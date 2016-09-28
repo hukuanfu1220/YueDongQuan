@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 
 class DiscoverViewController: UIViewController {
-    let titleArray = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight"]
+    let titleArray = ["最新", "附近", "关注", "招募", "求加入", "图片", "视频", "Eight"]
     var segementControl : HMSegmentedControl!
     //底部容器(用于装tableview)
     private var scrollContentView = UIScrollView()
@@ -30,11 +30,22 @@ class DiscoverViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        getdata()
-        self.title = "发现"
+        
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "我的", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 17 / 255, green: 182 / 255, blue: 244 / 255, alpha: 1)
-        self.navigationController?.navigationBar.tintColor = UIColor.blackColor()
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_lanqiu"), style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 24.0 / 255, green: 90.0 / 255, blue: 172.0 / 255, alpha: 1.0)
+        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: 65, height: 32))
+        let searchBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
+        searchBtn.setImage(UIImage(named: "ic_search"), forState: UIControlState.Normal)
+        rightView.addSubview(searchBtn)
+        let addBtn = UIButton(frame: CGRect(x: 33, y: 0, width: 32, height: 32))
+        addBtn.setImage(UIImage(named: "ic_search"), forState: UIControlState.Normal)
+        rightView.addSubview(addBtn)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightView)
+        
+        
+        
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
         segementControl = HMSegmentedControl(sectionTitles: titleArray )
         segementControl.autoresizingMask = [.FlexibleRightMargin, .FlexibleWidth]
