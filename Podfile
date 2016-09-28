@@ -13,9 +13,12 @@ target 'YueDongQuan' do
         pod 'Masonry', '~> 1.0.1'
         pod 'Alamofire', '~> 3.1.0'
         pod 'XHImageViewer', '0.1.2'
-        pod 'BaiduMapKit', '~> 3.0.0'
+        #pod 'BaiduMapKit', '~> 3.0.0'
        pod 'TZImagePickerController', '~> 1.6.7'
        pod 'HYBSnapkitAutoCellHeight', '~> 2.0.0'
+	pod 'AMapLocation', '~> 2.1.1'
+	pod 'AMap2DMap', '~> 4.3.0'
   # Pods for YueDongQuan
+
 
 end

@@ -11,21 +11,17 @@ import IQKeyboardManagerSwift
 import AFNetworking
 import Alamofire
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate,BMKGeneralDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var mapManager : BMKMapManager?
+    
     
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.window = UIWindow(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height))
         
-        mapManager = BMKMapManager()
-        let ret = mapManager?.start("9uKjbXPpHn8x1LSNh1tv90xuDEOTW2os", generalDelegate: self)
+        AMapServices.sharedServices().apiKey = "1c1e800f83bb6ae2eb2ec85813a5ce71"
         
-        if ret == false {
-            NSLog("地图开启失败")
-        }
         
         
         
