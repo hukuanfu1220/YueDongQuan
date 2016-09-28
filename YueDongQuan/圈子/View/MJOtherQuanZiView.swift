@@ -7,15 +7,17 @@
 //
 
 import UIKit
-import MapKit
-class MJOtherQuanZiView: UIView,UITableViewDelegate,UITableViewDataSource,BMKMapViewDelegate,BMKLocationServiceDelegate {
+
+
+class MJOtherQuanZiView: UIView,UITableViewDelegate,UITableViewDataSource,MAMapViewDelegate,AMapLocationManagerDelegate{
 lazy var  whiteView = UIView()
     lazy var label = UILabel()
     lazy var tableView = UITableView(frame: CGRectZero, style: .Plain)
     //地图试图
-    lazy var mapView = BMKMapView()
+    lazy var mapView = MAMapView()
     //定位服务
-    var localTion = BMKLocationService()
+    var locationManager = AMapLocationManager()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         whiteView.frame = CGRectMake(0, ScreenHeight, ScreenWidth ,ScreenHeight/3 )
@@ -46,22 +48,20 @@ lazy var  whiteView = UIView()
                                    ScreenWidth,
                                    ScreenHeight-ScreenHeight/3)
         mapView.tag = 10
-        mapView.zoomLevel = 21
+        mapView.zoomLevel = 10
         self .addSubview(mapView)
         //给地图添加长按手势
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressOnMapView))
         mapView .addGestureRecognizer(longPress)
         
-        localTion = BMKLocationService()
-        localTion.delegate = self
-        localTion.distanceFilter = 100
-        localTion.desiredAccuracy = 100
+//        localTion = AMapLocationManager()
+        locationManager.delegate = self
+        locationManager.distanceFilter = 100
+        locationManager.desiredAccuracy = 100
         
-        localTion.startUserLocationService()
-
+        locationManager.startUpdatingLocation()
         mapView.showsUserLocation = true
-        let userLocaltion = BMKUserLocation()
-        mapView.updateLocationData(userLocaltion)
+        
         
         //动画
         UIView.animateWithDuration(0.5, delay: 0,
@@ -111,7 +111,7 @@ lazy var  whiteView = UIView()
         return 60
     }
     //MARK:自定义大头针
-    func mapView(mapView: BMKMapView!, viewForAnnotation annotation: BMKAnnotation!) -> BMKAnnotationView! {
+    func mapView(mapView: MAMapView!, viewForAnnotation annotation: MAAnnotation!) -> MAAnnotationView! {
         //红色大头针
         if annotation.isKindOfClass(MJRedAnnotation) {
             var redAnno = mapView.dequeueReusableAnnotationViewWithIdentifier("redAnnotion")
@@ -141,12 +141,12 @@ lazy var  whiteView = UIView()
 
     
     //MARK: 定位服务代理
-    func didUpdateUserHeading(userLocation: BMKUserLocation!) {
+    func mapView(mapView: MAMapView!, didUpdateUserLocation userLocation: MAUserLocation!) {
         
     }
     
-    func didUpdateBMKUserLocation(userLocation: BMKUserLocation!) {
-        mapView.updateLocationData(userLocation)
+    func didUpdateBMKUserLocation(userLocation: MAUserLocation!) {
+//        mapView.updateLocationData(userLocation)
         mapView.showsUserLocation = true
         mapView.setCenterCoordinate(CLLocationCoordinate2D(latitude: userLocation.location.coordinate.latitude,
             longitude: userLocation.location.coordinate.longitude),

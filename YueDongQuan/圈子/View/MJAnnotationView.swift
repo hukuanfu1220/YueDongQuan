@@ -14,14 +14,15 @@ enum MJAnnotationViewType {
 }
 
 
-class MJAnnotationView: BMKAnnotationView {
+class MJAnnotationView: MAAnnotationView {
     
     var viewType = MJAnnotationViewType?.self
     //自定义初始化
-     init!(annotation: BMKAnnotation!, reuseIdentifier: String!,viewType:MJAnnotationViewType) {
+    
+    init!(annotation: MAAnnotation!, reuseIdentifier: String!,viewType:MJAnnotationViewType) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         if viewType == MJAnnotationViewType.Green {
-          self.image = UIImage(named: "img_putongquanzi")
+            self.image = UIImage(named: "img_putongquanzi")
         }else{
             self.image = UIImage(named: "img_simiquanzi")
         }
@@ -29,10 +30,11 @@ class MJAnnotationView: BMKAnnotationView {
         self.annotation = annotation
         self.canShowCallout = true
         self.calloutOffset = CGPoint(x: -5, y: 0)
-        
-        
+
     }
     
+    
+       
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
