@@ -9,13 +9,14 @@
 import UIKit
 import SnapKit
 
-class FieldViewController: MainViewController ,BMKMapViewDelegate,BMKLocationServiceDelegate,UITableViewDelegate,UITableViewDataSource{
-    var locationService : BMKLocationService?
+
+class FieldViewController: MainViewController,MAMapViewDelegate ,UITableViewDelegate,UITableViewDataSource{
+    
     var scroViewContent : UIScrollView!
     var fieldTable = UITableView()
     var weatherView = UIView()
     
-    var _mapView: BMKMapView!
+    var _mapView: MAMapView?
     
     var zoomCount : Float = 14
     
@@ -31,40 +32,28 @@ class FieldViewController: MainViewController ,BMKMapViewDelegate,BMKLocationSer
         
         
         
-        locationService = BMKLocationService()
-        locationService?.allowsBackgroundLocationUpdates = true
-        locationService?.delegate = self
-        locationService?.distanceFilter = kCLDistanceFilterNone
-        locationService?.desiredAccuracy  = kCLLocationAccuracyBest
-        locationService?.startUserLocationService()
         
-        _mapView = BMKMapView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: ScreenWidth*2/3))
-        
-        _mapView.userLocationVisible
-        _mapView?.showsUserLocation = false;//显示定位图层
-        _mapView.userTrackingMode = BMKUserTrackingModeNone
-        _mapView?.mapPadding = UIEdgeInsetsMake(0, 0, 28, 0)
-        _mapView?.showMapScaleBar = true
-        _mapView.zoomLevel = zoomCount
-        _mapView?.mapScaleBarPosition = CGPointMake(_mapView.frame.width - 60, _mapView.frame.height - 20)
-        let param = BMKLocationViewDisplayParam()
-        param.accuracyCircleStrokeColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0.5)
-        param.accuracyCircleFillColor = UIColor(red: 0, green: 1, blue: 0, alpha: 0.3)
-        _mapView.updateLocationViewWithParam(param)
-        
-        
-        let addAndReduceView = UIView(frame: CGRect(x: CGRectGetMaxX(_mapView.frame) - 40, y: CGRectGetMaxY(_mapView.frame) - 80, width: 25, height: 51))
-        _mapView.addSubview(addAndReduceView)
-        
-        let reduceBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-        reduceBtn.backgroundColor = UIColor.blueColor()
-        reduceBtn.addTarget(self, action: #selector(reduceBtnClick), forControlEvents: UIControlEvents.TouchUpInside)
-        addAndReduceView.addSubview(reduceBtn)
-        
-        let addBtn = UIButton(frame: CGRect(x: 0, y: 26, width: 25, height: 25))
-        addBtn.backgroundColor = UIColor.brownColor()
-        addBtn.addTarget(self, action: #selector(addBtnClick), forControlEvents: UIControlEvents.TouchUpInside)
-        addAndReduceView.addSubview(addBtn)
+   
+        _mapView = MAMapView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: ScreenWidth*2/3))
+        _mapView?.delegate = self
+        _mapView?.showsUserLocation = true
+        _mapView?.userTrackingMode = .Follow
+        _mapView?.setZoomLevel(15.1, animated: true)
+//
+//        
+//        
+//        let addAndReduceView = UIView(frame: CGRect(x: CGRectGetMaxX(_mapView.frame) - 40, y: CGRectGetMaxY(_mapView.frame) - 80, width: 25, height: 51))
+//        _mapView.addSubview(addAndReduceView)
+//        
+//        let reduceBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+//        reduceBtn.backgroundColor = UIColor.blueColor()
+//        reduceBtn.addTarget(self, action: #selector(reduceBtnClick), forControlEvents: UIControlEvents.TouchUpInside)
+//        addAndReduceView.addSubview(reduceBtn)
+//        
+//        let addBtn = UIButton(frame: CGRect(x: 0, y: 26, width: 25, height: 25))
+//        addBtn.backgroundColor = UIColor.brownColor()
+//        addBtn.addTarget(self, action: #selector(addBtnClick), forControlEvents: UIControlEvents.TouchUpInside)
+//        addAndReduceView.addSubview(addBtn)
         
         
         
@@ -103,14 +92,14 @@ class FieldViewController: MainViewController ,BMKMapViewDelegate,BMKLocationSer
         }else{
             zoomCount = 14
         }
-        _mapView.zoomLevel = zoomCount
+//        _mapView.zoomLevel = zoomCount
         
     }
     func addBtnClick(){
         if zoomCount < 20 {
             zoomCount += 1
         }
-        _mapView.zoomLevel = zoomCount
+//        _mapView.zoomLevel = zoomCount
     }
     
     
@@ -132,35 +121,59 @@ class FieldViewController: MainViewController ,BMKMapViewDelegate,BMKLocationSer
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         setNav()
-        _mapView?.viewWillAppear()
-        _mapView?.delegate = self
+        
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        _mapView?.viewWillAppear()
-        _mapView?.delegate = nil
-    }
-    func willStartLocatingUser() {
-        locationService?.startUserLocationService()
+        
     }
     
-    func didUpdateUserHeading(userLocation: BMKUserLocation!) {
-        NSLog("didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude)
-        _mapView.updateLocationData(userLocation)
-    }
-    
-    func didUpdateBMKUserLocation(userLocation: BMKUserLocation!) {
-        NSLog("didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude)
-        _mapView?.updateLocationData(userLocation)
-        _mapView.showsUserLocation = true
-        _mapView?.setCenterCoordinate(CLLocationCoordinate2D(latitude: userLocation.location.coordinate.latitude, longitude: userLocation.location.coordinate.longitude), animated: true)
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    /********************************************/
+    
+    func mapView(mapView: MAMapView!, didUpdateUserLocation userLocation: MAUserLocation!) {
+        
+    }
+    
+    func mapView(mapView: MAMapView!, viewForAnnotation annotation: MAAnnotation!) -> MAAnnotationView! {
+        if annotation.isKindOfClass(MAPointAnnotation) {
+            let annotationIdentifier = "invertGeoIdentifier"
+            
+            var poiAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationIdentifier) as? MAPinAnnotationView
+            
+            if poiAnnotationView == nil {
+                poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+            }
+            
+            poiAnnotationView!.animatesDrop   = true
+            poiAnnotationView!.canShowCallout = true
+            
+            return poiAnnotationView;
+        }
+        return nil
+    }
+    
+    func mapView(mapView: MAMapView, rendererForOverlay overlay: MAOverlay) -> MAOverlayRenderer? {
+        
+        if overlay.isKindOfClass(MACircle) {
+            let renderer: MACircleRenderer = MACircleRenderer(overlay: overlay)
+            renderer.fillColor = UIColor.greenColor().colorWithAlphaComponent(0.4)
+            renderer.strokeColor = UIColor.redColor()
+            renderer.lineWidth = 4.0
+            
+            return renderer
+        }
+        
+        return nil
+    }
+     /********************************************/
     
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
