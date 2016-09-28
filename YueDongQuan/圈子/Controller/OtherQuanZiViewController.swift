@@ -9,19 +9,21 @@
 import UIKit
 
 class OtherQuanZiViewController: MainViewController {
-
+    var  otherView : MJOtherQuanZiView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let whiteView = MJOtherQuanZiView(frame: self.view.frame)
-        self.view .addSubview(whiteView)
+       otherView  = MJOtherQuanZiView(frame: self.view.frame)
+        self.view .addSubview(otherView)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    override func viewWillAppear(animated: Bool) {
+        
+    }
 
     /*
     // MARK: - Navigation
