@@ -98,6 +98,8 @@
 		BF071F451D9A110B000551F7 /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF071F441D9A110B000551F7 /* PersonalViewController.swift */; };
 		BF071F471D9A1705000551F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF071F461D9A1705000551F7 /* Assets.xcassets */; };
 		BF1C0D6C1D8AAB5D009EA504 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C0D6B1D8AAB5D009EA504 /* CoreData.framework */; };
+		BF6FD5241D9BAF0D00F52C48 /* MJAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6FD5221D9BAF0D00F52C48 /* MJAnnotation.swift */; };
+		BF6FD5251D9BAF0D00F52C48 /* MJAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6FD5231D9BAF0D00F52C48 /* MJAnnotationView.swift */; };
 		BFA6DDBA1D88EC91009017DE /* PchFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA6DDB91D88EC91009017DE /* PchFile.swift */; };
 		BFA6DDC71D895C11009017DE /* UIControl+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA6DDC61D895C11009017DE /* UIControl+Custom.m */; };
 		BFC65D1D1D869FD1004E7E99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC65D1C1D869FD1004E7E99 /* AppDelegate.swift */; };
@@ -231,6 +233,8 @@
 		BF071F461D9A1705000551F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF1C0CB21D8A4CD5009EA504 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		BF1C0D6B1D8AAB5D009EA504 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		BF6FD5221D9BAF0D00F52C48 /* MJAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MJAnnotation.swift; sourceTree = "<group>"; };
+		BF6FD5231D9BAF0D00F52C48 /* MJAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MJAnnotationView.swift; sourceTree = "<group>"; };
 		BFA6DDB91D88EC91009017DE /* PchFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PchFile.swift; sourceTree = "<group>"; };
 		BFA6DDC51D895C11009017DE /* UIControl+Custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+Custom.h"; sourceTree = "<group>"; };
 		BFA6DDC61D895C11009017DE /* UIControl+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+Custom.m"; sourceTree = "<group>"; };
@@ -346,6 +350,8 @@
 		BF071EE91D9A0D5F000551F7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BF6FD5221D9BAF0D00F52C48 /* MJAnnotation.swift */,
+				BF6FD5231D9BAF0D00F52C48 /* MJAnnotationView.swift */,
 				BF071EEA1D9A0D5F000551F7 /* CircleDataView.swift */,
 				BF071EEB1D9A0D5F000551F7 /* MHRadioButton.h */,
 				BF071EEC1D9A0D5F000551F7 /* MHRadioButton.m */,
@@ -809,6 +815,7 @@
 				BF071EFB1D9A0D5F000551F7 /* ParterDataViewController.swift in Sources */,
 				BF071F341D9A0D68000551F7 /* ConfirmOldPw.swift in Sources */,
 				5C90F13B1D8FCFA0005E16AF /* YJTabBarButton.m in Sources */,
+				BF6FD5251D9BAF0D00F52C48 /* MJAnnotationView.swift in Sources */,
 				BF071EF71D9A0D5F000551F7 /* ChatViewController.swift in Sources */,
 				5C90F1281D8FCD03005E16AF /* HKFTableBarController.swift in Sources */,
 				BF071F361D9A0D68000551F7 /* likeButton.swift in Sources */,
@@ -817,6 +824,7 @@
 				BF071EF61D9A0D5F000551F7 /* AllNoticeViewController.swift in Sources */,
 				5C072B601D8F8D2500420F6D /* YoYoAlertView.swift in Sources */,
 				BF071EF91D9A0D5F000551F7 /* NewQuanZiViewController.swift in Sources */,
+				BF6FD5241D9BAF0D00F52C48 /* MJAnnotation.swift in Sources */,
 				5C90F1391D8FCFA0005E16AF /* UIView+Frame.m in Sources */,
 				5C90F1371D8FCFA0005E16AF /* UIBarButtonItem+YJItem.m in Sources */,
 				BFC65D5A1D86A1AF004E7E99 /* YXCustomActionSheet.m in Sources */,
