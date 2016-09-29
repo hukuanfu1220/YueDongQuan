@@ -10,24 +10,15 @@ import UIKit
 import Foundation
 import MapKit
 
-class MJGreenAnnotation: NSObject,MKAnnotation {
-    override init() {
-        super.init()
-    }
-    var  coordinate = CLLocationCoordinate2D()
-    var title: String? = nil
-    var  subtitle: String? = nil
+class MJGreenAnnotation:MAPointAnnotation {
+   
     
     
 }
 
-class MJRedAnnotation: NSObject,MKAnnotation {
+class MJRedAnnotation: MAPointAnnotation {
     override init() {
         super.init()
     }
-    var  coordinate = CLLocationCoordinate2D()
-    var title: String? = nil
-    var  subtitle: String? = nil
-    
-    
+  
 }
