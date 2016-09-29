@@ -30,6 +30,8 @@
 		5C343A001D90E8AB0077BFDD /* SignRankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3439FF1D90E8AB0077BFDD /* SignRankCell.swift */; };
 		5C343A021D91361C0077BFDD /* KYCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C343A011D91361C0077BFDD /* KYCircularProgress.swift */; };
 		5C343A041D91366F0077BFDD /* SignRankBtnController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C343A031D91366F0077BFDD /* SignRankBtnController.swift */; };
+		5C3B9A011D9D0A0400AF7CFE /* QuanZiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3B9A001D9D0A0400AF7CFE /* QuanZiCell.swift */; };
+		5C3B9A031D9D17A900AF7CFE /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3B9A021D9D17A900AF7CFE /* SearchResultCell.swift */; };
 		5C8C3C651D9276F500D756FF /* SignSportsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8C3C641D9276F500D756FF /* SignSportsCell.swift */; };
 		5C8C3C671D92771600D756FF /* SignPersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8C3C661D92771600D756FF /* SignPersonCell.swift */; };
 		5C8C3C691D927FAD00D756FF /* SignCellForHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8C3C681D927FAD00D756FF /* SignCellForHeader.swift */; };
@@ -48,6 +50,7 @@
 		5CBAA8EF1D99011F000E21E9 /* LxGridViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAA8EC1D99011F000E21E9 /* LxGridViewFlowLayout.m */; };
 		5CBAA8F01D99011F000E21E9 /* TZTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAA8EE1D99011F000E21E9 /* TZTestCell.m */; };
 		5CBAA8F21D9908B1000E21E9 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CBAA8F11D9908B1000E21E9 /* AssetsLibrary.framework */; };
+		5CC48A041D9CECF8009C4AFE /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC48A031D9CECF8009C4AFE /* SearchController.swift */; };
 		5CD980EA1D9615FF007828E2 /* CircleAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD980E91D9615FF007828E2 /* CircleAnimation.swift */; };
 		5CD981061D96546A007828E2 /* XTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD981051D96546A007828E2 /* XTimer.m */; };
 		5CE4A7E91D8AC1ED00F25CF6 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE4A7E81D8AC1ED00F25CF6 /* HMSegmentedControl.m */; };
@@ -150,6 +153,8 @@
 		5C3439FF1D90E8AB0077BFDD /* SignRankCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignRankCell.swift; sourceTree = "<group>"; };
 		5C343A011D91361C0077BFDD /* KYCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCircularProgress.swift; sourceTree = "<group>"; };
 		5C343A031D91366F0077BFDD /* SignRankBtnController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignRankBtnController.swift; sourceTree = "<group>"; };
+		5C3B9A001D9D0A0400AF7CFE /* QuanZiCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuanZiCell.swift; path = "YueDongQuan/搜索/View/QuanZiCell.swift"; sourceTree = SOURCE_ROOT; };
+		5C3B9A021D9D17A900AF7CFE /* SearchResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		5C8C3C641D9276F500D756FF /* SignSportsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignSportsCell.swift; sourceTree = "<group>"; };
 		5C8C3C661D92771600D756FF /* SignPersonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignPersonCell.swift; sourceTree = "<group>"; };
 		5C8C3C681D927FAD00D756FF /* SignCellForHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignCellForHeader.swift; sourceTree = "<group>"; };
@@ -178,6 +183,7 @@
 		5CBAA8ED1D99011F000E21E9 /* TZTestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZTestCell.h; sourceTree = "<group>"; };
 		5CBAA8EE1D99011F000E21E9 /* TZTestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZTestCell.m; sourceTree = "<group>"; };
 		5CBAA8F11D9908B1000E21E9 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		5CC48A031D9CECF8009C4AFE /* SearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		5CD980E91D9615FF007828E2 /* CircleAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleAnimation.swift; sourceTree = "<group>"; };
 		5CD981041D96546A007828E2 /* XTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTimer.h; sourceTree = "<group>"; };
 		5CD981051D96546A007828E2 /* XTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTimer.m; sourceTree = "<group>"; };
@@ -311,6 +317,40 @@
 			path = HYBMasonryAutoCellHeight;
 			sourceTree = "<group>";
 		};
+		5CC489FF1D9CECDC009C4AFE /* 搜索 */ = {
+			isa = PBXGroup;
+			children = (
+				5CC48A001D9CECDC009C4AFE /* Controller */,
+				5CC48A011D9CECDC009C4AFE /* Model */,
+				5CC48A021D9CECDC009C4AFE /* View */,
+			);
+			path = "搜索";
+			sourceTree = "<group>";
+		};
+		5CC48A001D9CECDC009C4AFE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5CC48A031D9CECF8009C4AFE /* SearchController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5CC48A011D9CECDC009C4AFE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5CC48A021D9CECDC009C4AFE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5C3B9A001D9D0A0400AF7CFE /* QuanZiCell.swift */,
+				5C3B9A021D9D17A900AF7CFE /* SearchResultCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		5CE4A7E61D8AC1ED00F25CF6 /* HMSegmentedControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +471,7 @@
 		BFC65D1B1D869FD1004E7E99 /* YueDongQuan */ = {
 			isa = PBXGroup;
 			children = (
+				5CC489FF1D9CECDC009C4AFE /* 搜索 */,
 				BFC65D421D86A0C6004E7E99 /* 第三方 */,
 				BFC65D431D86A0C6004E7E99 /* 配置文件 */,
 				BFC65D441D86A0C6004E7E99 /* 其它 */,
@@ -825,6 +866,7 @@
 				BF071F451D9A110B000551F7 /* PersonalViewController.swift in Sources */,
 				BF071EF61D9A0D5F000551F7 /* AllNoticeViewController.swift in Sources */,
 				5C072B601D8F8D2500420F6D /* YoYoAlertView.swift in Sources */,
+				5CC48A041D9CECF8009C4AFE /* SearchController.swift in Sources */,
 				BF071EF91D9A0D5F000551F7 /* NewQuanZiViewController.swift in Sources */,
 				BF6FD5241D9BAF0D00F52C48 /* MJAnnotation.swift in Sources */,
 				5C90F1391D8FCFA0005E16AF /* UIView+Frame.m in Sources */,
@@ -848,6 +890,7 @@
 				BF071F3A1D9A0D68000551F7 /* MJDatePikerView.swift in Sources */,
 				5C24BB6B1D9A48A200A6D25F /* HKFPostImageVC.m in Sources */,
 				BF071F051D9A0D5F000551F7 /* MHRadioButton.m in Sources */,
+				5C3B9A031D9D17A900AF7CFE /* SearchResultCell.swift in Sources */,
 				5C2A956C1D8D86B2006D1462 /* CellModel.m in Sources */,
 				BF071F431D9A10DA000551F7 /* QuanZiViewController.swift in Sources */,
 				BF071F381D9A0D68000551F7 /* MJAlertView.swift in Sources */,
@@ -864,6 +907,7 @@
 				BF071F3D1D9A0D68000551F7 /* MyDongdouView.swift in Sources */,
 				BFA6DDBA1D88EC91009017DE /* PchFile.swift in Sources */,
 				BF071F091D9A0D5F000551F7 /* MJHeadimageWithSubimageView.swift in Sources */,
+				5C3B9A011D9D0A0400AF7CFE /* QuanZiCell.swift in Sources */,
 				BF071F3C1D9A0D68000551F7 /* MyDongdouTableViewCell.swift in Sources */,
 				BFC65D471D86A0F9004E7E99 /* MainTabBarViewController.swift in Sources */,
 				5CBAA8EF1D99011F000E21E9 /* LxGridViewFlowLayout.m in Sources */,
