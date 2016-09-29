@@ -9,7 +9,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 import AFNetworking
-import Alamofire
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.window = UIWindow(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height))
         
-        AMapServices.sharedServices().apiKey = "1c1e800f83bb6ae2eb2ec85813a5ce71"
+        AMapServices.sharedServices().apiKey = "cc7ada21dae93efe53c70dc7d6a46598"
         
         
         
@@ -40,14 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }) { (NSURLResponse, AnyObject, NSError) in
                 
         }
-        let serializer = AFHTTPRequestSerializer()
-        serializer.requestWithMethod("POST", URLString: "www.baidu.com", parameters: nil, error: nil)
-        
-        Alamofire.request(.GET, url!, parameters:nil)
-            .responseJSON { response -> Void in
-                
-        print("aaa",response.description)
-        }
+       
         
         
         

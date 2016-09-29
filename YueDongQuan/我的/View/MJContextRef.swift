@@ -36,11 +36,11 @@ class MJContextRef: UIButton {
         let point3 = CGPoint(x: screenWidth/2/2, y: 0)
         let point  = [point1,point2,point3]
 //        CGContextAddLines(context, sPoints, 3);//添加线
-        CGContextAddLines(context, point, 3)
-        CGContextClosePath(context);//封起来
-         CGContextSetFillColorWithColor(context, UIColor.whiteColor().CGColor)
+        CGContextAddLines(context!, point, 3)
+        CGContextClosePath(context!);//封起来
+         CGContextSetFillColorWithColor(context!, UIColor.whiteColor().CGColor)
 //        CGContextDrawPath(context, kCGPathFillStroke);
-        CGContextDrawPath(context, .Fill)
+        CGContextDrawPath(context!, .Fill)
        
     }
  

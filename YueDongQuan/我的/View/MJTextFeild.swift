@@ -16,8 +16,8 @@ class MJTextFeild: UITextField {
     override func drawRect(rect: CGRect) {
        
         let context = UIGraphicsGetCurrentContext()
-        CGContextSetFillColorWithColor(context, UIColor.blueColor().CGColor)
-        CGContextFillRect(context, CGRectMake(0, CGRectGetHeight(self.frame)-0.5, CGRectGetWidth(self.frame), 0.5))
+        CGContextSetFillColorWithColor(context!, UIColor.blueColor().CGColor)
+        CGContextFillRect(context!, CGRectMake(0, CGRectGetHeight(self.frame)-0.5, CGRectGetWidth(self.frame), 0.5))
         
         
     }

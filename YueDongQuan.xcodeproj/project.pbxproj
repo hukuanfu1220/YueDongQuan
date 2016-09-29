@@ -102,7 +102,7 @@
 		BF071F471D9A1705000551F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF071F461D9A1705000551F7 /* Assets.xcassets */; };
 		BF1C0D6C1D8AAB5D009EA504 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C0D6B1D8AAB5D009EA504 /* CoreData.framework */; };
 		BF6FD5241D9BAF0D00F52C48 /* MJAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6FD5221D9BAF0D00F52C48 /* MJAnnotation.swift */; };
-		BF6FD5251D9BAF0D00F52C48 /* MJAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6FD5231D9BAF0D00F52C48 /* MJAnnotationView.swift */; };
+		BFA3273D1D9CF7200003AA4D /* MJGreenAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA3273C1D9CF7200003AA4D /* MJGreenAnnotationView.swift */; };
 		BFA6DDBA1D88EC91009017DE /* PchFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA6DDB91D88EC91009017DE /* PchFile.swift */; };
 		BFA6DDC71D895C11009017DE /* UIControl+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA6DDC61D895C11009017DE /* UIControl+Custom.m */; };
 		BFC65D1D1D869FD1004E7E99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC65D1C1D869FD1004E7E99 /* AppDelegate.swift */; };
@@ -239,8 +239,9 @@
 		BF071F461D9A1705000551F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF1C0CB21D8A4CD5009EA504 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		BF1C0D6B1D8AAB5D009EA504 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		BF3061681D9CAB5100999402 /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = ../../../../Downloads/AMapSearchKit.framework; sourceTree = "<group>"; };
 		BF6FD5221D9BAF0D00F52C48 /* MJAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MJAnnotation.swift; sourceTree = "<group>"; };
-		BF6FD5231D9BAF0D00F52C48 /* MJAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MJAnnotationView.swift; sourceTree = "<group>"; };
+		BFA3273C1D9CF7200003AA4D /* MJGreenAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MJGreenAnnotationView.swift; sourceTree = "<group>"; };
 		BFA6DDB91D88EC91009017DE /* PchFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PchFile.swift; sourceTree = "<group>"; };
 		BFA6DDC51D895C11009017DE /* UIControl+Custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+Custom.h"; sourceTree = "<group>"; };
 		BFA6DDC61D895C11009017DE /* UIControl+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+Custom.m"; sourceTree = "<group>"; };
@@ -287,6 +288,7 @@
 		3D602F91B05F501B8CB40CE0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BF3061681D9CAB5100999402 /* AMapSearchKit.framework */,
 				5CBAA8F11D9908B1000E21E9 /* AssetsLibrary.framework */,
 				5CA4EA3B1D8E96B5001A8E8D /* MapKit.framework */,
 				BF1C0D6B1D8AAB5D009EA504 /* CoreData.framework */,
@@ -391,7 +393,6 @@
 			isa = PBXGroup;
 			children = (
 				BF6FD5221D9BAF0D00F52C48 /* MJAnnotation.swift */,
-				BF6FD5231D9BAF0D00F52C48 /* MJAnnotationView.swift */,
 				BF071EEA1D9A0D5F000551F7 /* CircleDataView.swift */,
 				BF071EEB1D9A0D5F000551F7 /* MHRadioButton.h */,
 				BF071EEC1D9A0D5F000551F7 /* MHRadioButton.m */,
@@ -404,6 +405,7 @@
 				BF071EF31D9A0D5F000551F7 /* MJParterDataView.swift */,
 				BF071EF41D9A0D5F000551F7 /* MJQRCodeView.swift */,
 				BF071EF51D9A0D5F000551F7 /* QRCodeView.swift */,
+				BFA3273C1D9CF7200003AA4D /* MJGreenAnnotationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -736,7 +738,8 @@
 				TargetAttributes = {
 					BFC65D181D869FD1004E7E99 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 3FXX5XTJ2H;
+						DevelopmentTeam = 27WZT2322T;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -856,7 +859,6 @@
 				BF071EFB1D9A0D5F000551F7 /* ParterDataViewController.swift in Sources */,
 				BF071F341D9A0D68000551F7 /* ConfirmOldPw.swift in Sources */,
 				5C90F13B1D8FCFA0005E16AF /* YJTabBarButton.m in Sources */,
-				BF6FD5251D9BAF0D00F52C48 /* MJAnnotationView.swift in Sources */,
 				BF071EF71D9A0D5F000551F7 /* ChatViewController.swift in Sources */,
 				5C90F1281D8FCD03005E16AF /* HKFTableBarController.swift in Sources */,
 				BF071F361D9A0D68000551F7 /* likeButton.swift in Sources */,
@@ -868,6 +870,7 @@
 				BF071EF91D9A0D5F000551F7 /* NewQuanZiViewController.swift in Sources */,
 				BF6FD5241D9BAF0D00F52C48 /* MJAnnotation.swift in Sources */,
 				5C90F1391D8FCFA0005E16AF /* UIView+Frame.m in Sources */,
+				BFA3273D1D9CF7200003AA4D /* MJGreenAnnotationView.swift in Sources */,
 				5C90F1371D8FCFA0005E16AF /* UIBarButtonItem+YJItem.m in Sources */,
 				BFC65D5A1D86A1AF004E7E99 /* YXCustomActionSheet.m in Sources */,
 				5C24BB721D9A5C9C00A6D25F /* HKFPostVideoVC.m in Sources */,
@@ -1000,6 +1003,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -1037,6 +1041,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 2.3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1049,6 +1054,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/YueDongQuan",
+					"$(PROJECT_DIR)/YueDongQuan/配置文件",
+				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/YueDongQuan/配置文件/YDQPrefixHeader.pch";
@@ -1057,11 +1067,55 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.redong.YueDongQuan;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"stdc++.6.0.9\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AFNetworking\"",
+					"-framework",
+					"\"AMapFoundationKit\"",
+					"-framework",
+					"\"AMapLocationKit\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"HYBSnapkitAutoCellHeight\"",
+					"-framework",
+					"\"IQKeyboardManagerSwift\"",
+					"-framework",
+					"\"JavaScriptCore\"",
+					"-framework",
+					"\"MAMapKit\"",
+					"-framework",
+					"\"Masonry\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SnapKit\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TZImagePickerController\"",
+					"-framework",
+					"\"XHImageViewer\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.redong.YueDongQuans;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/YueDongQuan/第三方/CustomActionSheet/YueDongQuan-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -1074,6 +1128,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/YueDongQuan",
+					"$(PROJECT_DIR)/YueDongQuan/配置文件",
+				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/YueDongQuan/配置文件/YDQPrefixHeader.pch";
@@ -1082,10 +1141,54 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.redong.YueDongQuan;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"stdc++.6.0.9\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AFNetworking\"",
+					"-framework",
+					"\"AMapFoundationKit\"",
+					"-framework",
+					"\"AMapLocationKit\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"HYBSnapkitAutoCellHeight\"",
+					"-framework",
+					"\"IQKeyboardManagerSwift\"",
+					"-framework",
+					"\"JavaScriptCore\"",
+					"-framework",
+					"\"MAMapKit\"",
+					"-framework",
+					"\"Masonry\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SnapKit\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TZImagePickerController\"",
+					"-framework",
+					"\"XHImageViewer\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.redong.YueDongQuans;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/YueDongQuan/第三方/CustomActionSheet/YueDongQuan-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
