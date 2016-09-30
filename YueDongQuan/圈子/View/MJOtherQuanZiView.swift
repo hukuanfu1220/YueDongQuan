@@ -10,13 +10,24 @@ import UIKit
 
 
 class MJOtherQuanZiView: UIView,UITableViewDelegate,UITableViewDataSource,MAMapViewDelegate,AMapLocationManagerDelegate{
-lazy var  whiteView = UIView()
+    lazy var  whiteView = UIView()
+    
     lazy var label = UILabel()
+    
     lazy var tableView = UITableView(frame: CGRectZero, style: .Plain)
     //地图试图
     lazy var mapView = MAMapView()
     //定位服务
     var locationManager = AMapLocationManager()
+    
+    var completionBlock: ((location: CLLocation?,
+    regeocode: AMapLocationReGeocode?,
+    error: NSError?) -> Void)!
+    
+    let defaultLocationTimeout = 6
+    let defaultReGeocodeTimeout = 3
+    
+    var annotations : NSMutableArray!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -48,20 +59,38 @@ lazy var  whiteView = UIView()
                                    ScreenWidth,
                                    ScreenHeight-ScreenHeight/3)
         mapView.tag = 10
-        mapView.zoomLevel = 10
+        mapView.delegate = self
         self .addSubview(mapView)
-        //给地图添加长按手势
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressOnMapView))
-        mapView .addGestureRecognizer(longPress)
         
-//        localTion = AMapLocationManager()
-        locationManager.delegate = self
-        locationManager.distanceFilter = 100
-        locationManager.desiredAccuracy = 100
+//        mapView.showsUserLocation = true
+        //MARK:自定义经纬度
+        annotations = NSMutableArray()
+        let   coordinates = [[29.287746,106.012341],
+                             [29.1342223,106.42112],
+                             [28.243223,106.927462],
+                             [29.4392749,106.3274685],
+                             [29.486173,106.846512]]
+        for i in 0 ..< coordinates.count {
+            if i % 2 == 0 {
+                let gren = MJGreenAnnotation()
+                let coordate = CLLocationCoordinate2D(latitude: 29.583859 + Double(i), longitude: 106.489968 + Double(i))
+                gren.coordinate = coordate
+                annotations .addObject(gren)
+            }else{
+                let red = MJRedAnnotation()
+                let coordate = CLLocationCoordinate2D(latitude: 29.287746 - Double(i), longitude: 106.012341 - Double(i))
+                red.coordinate = coordate
+                annotations .addObject(red)
+            }
+        }
         
-        locationManager.startUpdatingLocation()
-        mapView.showsUserLocation = true
+       
+        initCompleteBlock()
         
+        configLocationManager()
+        
+        //逆地理编码
+        reGeocodeAction()
         
         //动画
         UIView.animateWithDuration(0.5, delay: 0,
@@ -77,8 +106,73 @@ lazy var  whiteView = UIView()
                                        ScreenWidth,
                                        ScreenHeight-ScreenHeight/3)
         }
-       
+ 
+
     }
+    //MARK: - Action Handle
+    
+    func configLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        
+        locationManager.pausesLocationUpdatesAutomatically = false
+        
+        locationManager.allowsBackgroundLocationUpdates = true
+        
+        locationManager.locationTimeout = defaultLocationTimeout
+        
+        locationManager.reGeocodeTimeout = defaultReGeocodeTimeout
+    }
+
+    func reGeocodeAction() {
+        mapView.removeAnnotations(mapView.annotations)
+        
+        locationManager.requestLocationWithReGeocode(true, completionBlock: completionBlock)
+    }
+
+
+    func initCompleteBlock() {
+        
+        completionBlock = { [weak self] (location: CLLocation?, regeocode: AMapLocationReGeocode?, error: NSError?) in
+            if let error = error {
+                NSLog("locError:{%d - %@};", error.code, error.localizedDescription)
+                
+                if error.code == AMapLocationErrorCode.LocateFailed.rawValue {
+                    return;
+                }
+            }
+            
+            if let location = location {
+                
+                let annotation = MJRedAnnotation()
+                annotation.coordinate = location.coordinate
+                
+                if let regeocode = regeocode {
+                    annotation.title = regeocode.formattedAddress
+                    annotation.subtitle = "\(regeocode.citycode)-\(regeocode.adcode)-\(location.horizontalAccuracy)m"
+                }
+                else {
+                    annotation.title = String(format: "lat:%.6f;lon:%.6f;", arguments: [location.coordinate.latitude, location.coordinate.longitude])
+                    annotation.subtitle = "accuracy:\(location.horizontalAccuracy)m"
+                }
+                
+                self?.addAnnotationsToMapView(annotation)
+
+            }
+            
+        }
+    }
+    //添加大头针
+    func addAnnotationsToMapView(annotation: MAAnnotation) {
+        
+        mapView .addAnnotations(annotations as [AnyObject])
+        mapView.addAnnotation(annotation)
+        mapView.selectAnnotation(annotation, animated: true)
+        mapView.setZoomLevel(15.1, animated: false)
+        mapView.setCenterCoordinate(annotation.coordinate, animated: true)
+
+    }
+
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -112,49 +206,62 @@ lazy var  whiteView = UIView()
     }
     //MARK:自定义大头针
     func mapView(mapView: MAMapView!, viewForAnnotation annotation: MAAnnotation!) -> MAAnnotationView! {
-        //红色大头针
-        if annotation.isKindOfClass(MJRedAnnotation) {
-            var redAnno = mapView.dequeueReusableAnnotationViewWithIdentifier("redAnnotion")
-            if redAnno == nil {
-                redAnno = MJAnnotationView(annotation: annotation, reuseIdentifier: "redAnnotion", viewType: MJAnnotationViewType.Red)
-                redAnno.tag = 1
-                
-            }else{
-                redAnno.removeFromSuperview()
-            }
+        
 
-            return redAnno
-            
-        }
-        //绿色大头针
-        else if annotation.isKindOfClass(MJGreenAnnotation){
-            var greenAnno = mapView.dequeueReusableAnnotationViewWithIdentifier("greenAnnotion")
-            if greenAnno == nil {
-                greenAnno = MJAnnotationView(annotation: annotation, reuseIdentifier: "greenAnnotion", viewType: MJAnnotationViewType.Green)
-            }else{
-                greenAnno.removeFromSuperview()
+            if annotation.isKindOfClass(MJGreenAnnotation) {
+                let pointReuseIndetifier = "pointReuseIndetifier"
+                
+                var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(pointReuseIndetifier)
+                if annotationView == nil {
+                    annotationView = MJGreenAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
+                }
+                
+                annotationView?.canShowCallout  = true
+                annotationView?.draggable       = true
+                annotationView?.image = UIImage(named: "img_putongquanzi")
+                return annotationView
             }
-            return greenAnno
+        
+        if annotation.isKindOfClass(MJRedAnnotation) {
+            let redReuseIndetifier = "red"
+            var redAnnotation = mapView.dequeueReusableAnnotationViewWithIdentifier(redReuseIndetifier)
+            if redAnnotation == nil {
+                redAnnotation = MJRedAnnotationView(annotation: annotation, reuseIdentifier: redReuseIndetifier)
+            }
+            return redAnnotation
+
         }
         return nil
     }
 
     
     //MARK: 定位服务代理
+    
+    func amapLocationManager(manager: AMapLocationManager!, didUpdateLocation location: CLLocation!) {
+        NSLog("location:{lat:%f; lon:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
+    }
+    
     func mapView(mapView: MAMapView!, didUpdateUserLocation userLocation: MAUserLocation!) {
         
     }
     
     func didUpdateBMKUserLocation(userLocation: MAUserLocation!) {
-//        mapView.updateLocationData(userLocation)
-        mapView.showsUserLocation = true
-        mapView.setCenterCoordinate(CLLocationCoordinate2D(latitude: userLocation.location.coordinate.latitude,
-            longitude: userLocation.location.coordinate.longitude),
-                                    animated: true)
-        
-        
-        
+    
     }
+    func mapView(mapView: MAMapView!, didLongPressedAtCoordinate coordinate: CLLocationCoordinate2D) {
+
+        let pointView = MJGreenAnnotation()
+        pointView.coordinate = coordinate
+        locationManager.requestLocationWithReGeocode(true) { (location:CLLocation!, regeocode:AMapLocationReGeocode!, error:NSError!) in
+            if (regeocode != nil){
+                pointView.title = regeocode.formattedAddress
+//                pointView.subtitle = regeocode.city
+                mapView.delegate = self
+                mapView .addAnnotation(pointView)
+            }
+        }
+    }
+    
     func myAwesomeMethod(placemark: CLPlacemark) {
        //国家
         let  country = placemark.country
@@ -174,48 +281,4 @@ lazy var  whiteView = UIView()
        
     }
     
-    //动态添加大头针
-    func longPressOnMapView(longpress:UILongPressGestureRecognizer) {
-        if longpress.state == .Began {
-            //第二次长按时移除上一个大头针
-            let redView = self.viewWithTag(10)?.viewWithTag(1)
-            if redView != nil {
-                redView?.removeFromSuperview()
-            }
-            //获取point
-            let point = longpress.locationInView(mapView)
-            //将地图上的point转化为经纬度
-            let coordinate = mapView.convertPoint(point, toCoordinateFromView: mapView)
-            //红色大头针
-            let redPointAnno = MJRedAnnotation()
-            redPointAnno.coordinate = coordinate
-            //绿色大头针
-            let greenPointAnno = MJGreenAnnotation()
-            greenPointAnno.coordinate = coordinate
-            
-            //反地理编码
-            let gecoder = CLGeocoder()
-            let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-            gecoder.reverseGeocodeLocation(location, completionHandler: { (placemark:[CLPlacemark]?, error:NSError?) in
-                if error != nil {
-                    print("Geocode failed with error: (error.localizedDescription)")
-                }
-                if placemark!.count > 0 {
-                    let myPlacemark = placemark![0]
-                    self.myAwesomeMethod(myPlacemark)
-                    if redPointAnno.isKindOfClass(MJRedAnnotation){
-                        redPointAnno.title = myPlacemark.locality
-                        redPointAnno.subtitle = myPlacemark.thoroughfare
-                        self.mapView.delegate = self
-                        self.mapView .addAnnotations([redPointAnno])
-                    }
-                    
-                } else {
-                    print("No placemark")
-                }
-            })
-
-            
-        }
-    }
 }

@@ -239,7 +239,7 @@ class SignHeaderView: UIView {
         image.drawInRect(CGRect(x: 0, y: 0, width: resize.width, height: resize.height))
         let imageTemp = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return imageTemp
+        return imageTemp!
         
     }
     
