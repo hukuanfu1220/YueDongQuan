@@ -24,9 +24,10 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         self.edgesForExtendedLayout = .None
         self.view.backgroundColor = UIColor.whiteColor()
-        // Do any additional setup after loading the view.
+        
+        
     }
-    
+ 
     //MARK:  导航栏视图
     func creatViewWithSnapKit(leftBarButtonImageString:NSString,secondBtnImageString:String,thirdBtnImageString:String)  {
         

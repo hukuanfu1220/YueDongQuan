@@ -44,7 +44,7 @@ lazy var  quanZiImage = UIImageView()
         quanZiBtn.setTitle("圈子图片", forState: UIControlState.Normal)
         quanZiBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
         quanZiBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        quanZiBtn.titleLabel?.font = UIFont.systemFontOfSize(14)
+        quanZiBtn.titleLabel?.font = UIFont.systemFontOfSize(kMidScaleOfFont)
         self.view .addSubview(quanZiNameField)
         quanZiNameField.snp_makeConstraints { (make) in
             make.left.equalTo(10)

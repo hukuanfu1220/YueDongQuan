@@ -71,7 +71,7 @@ class MJDatePikerView: UIView {
                         //标题
 //                        titleLabel.frame = CGRect(x: 0, y: 15, width: width, height: 25)
                         titleLabel.textColor = UIColor.blackColor()
-                        titleLabel.font = UIFont.systemFontOfSize(19)
+                        titleLabel.font = UIFont.systemFontOfSize(kTopScaleOfFont)
                         titleLabel.textAlignment = .Center
                         titleLabel.snp_makeConstraints { (make) in
                             make.top.equalTo(0)
@@ -91,7 +91,7 @@ class MJDatePikerView: UIView {
             make.height.equalTo(titleHeight)
         }
         cancelBtn.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
-        cancelBtn.titleLabel?.font = UIFont.systemFontOfSize(18)
+        cancelBtn.titleLabel?.font = UIFont.systemFontOfSize(kTopScaleOfFont)
         cancelBtn.contentHorizontalAlignment = .Left
         cancelBtn.tag = 1
         cancelBtn.addTarget(self, action: #selector(clickBtnAction(_:)), forControlEvents: .TouchUpInside)
@@ -105,7 +105,7 @@ class MJDatePikerView: UIView {
         }
         sureBtn.backgroundColor = UIColor.redColor()
         sureBtn.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
-        sureBtn.titleLabel?.font = UIFont.systemFontOfSize(18)
+        sureBtn.titleLabel?.font = UIFont.systemFontOfSize(kTopScaleOfFont)
         sureBtn.contentHorizontalAlignment = .Right
         sureBtn.tag = 2
         sureBtn.addTarget(self, action: #selector(clickBtnAction(_:)), forControlEvents: .TouchUpInside)

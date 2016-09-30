@@ -34,6 +34,8 @@ class PersonalViewController: MainViewController,UITableViewDelegate,UITableView
         
         self .creatViewWithSnapKit()
         self.creatViewWithSnapKit("ic_lanqiu", secondBtnImageString: "ic_search", thirdBtnImageString: "ic_shezhi")
+        
+        print("ScreenWidth",ScreenWidth)
     }
     
     override func viewWillAppear(animated: Bool) {

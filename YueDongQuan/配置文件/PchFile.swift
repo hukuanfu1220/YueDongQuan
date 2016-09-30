@@ -13,3 +13,6 @@ import Foundation
 
 let ScreenWidth = UIScreen .mainScreen().bounds.width
 let ScreenHeight = UIScreen.mainScreen().bounds.height
+let kTopScaleOfFont = 18 * ScreenWidth / 414.0
+let kMidScaleOfFont = 14 * ScreenWidth / 414.0
+let kSmallScaleOfFont = 12 * ScreenWidth / 414.0

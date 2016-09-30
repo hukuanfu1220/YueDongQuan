@@ -10,8 +10,9 @@ import UIKit
 
 
 class MJOtherQuanZiView: UIView,UITableViewDelegate,UITableViewDataSource,MAMapViewDelegate,AMapLocationManagerDelegate{
+    //白色的背景图
     lazy var  whiteView = UIView()
-    
+    //附近活跃圈子
     lazy var label = UILabel()
     
     lazy var tableView = UITableView(frame: CGRectZero, style: .Plain)
@@ -23,20 +24,21 @@ class MJOtherQuanZiView: UIView,UITableViewDelegate,UITableViewDataSource,MAMapV
     var completionBlock: ((location: CLLocation?,
     regeocode: AMapLocationReGeocode?,
     error: NSError?) -> Void)!
-    
+    //地理编码时间
     let defaultLocationTimeout = 6
+    //反地理编码时间
     let defaultReGeocodeTimeout = 3
-    
+    //大头针组
     var annotations : NSMutableArray!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         whiteView.frame = CGRectMake(0, ScreenHeight, ScreenWidth ,ScreenHeight/3 )
         self .addSubview(whiteView)
-        
         whiteView .addSubview(label)
         label.snp_makeConstraints { (make) in
-            make.top.left.equalTo(10)
+            make.top.equalTo(whiteView.snp_top).offset(10)
+            make.left.equalTo(whiteView.snp_left).offset(10)
             make.height.equalTo(15)
             
         }
@@ -51,17 +53,20 @@ class MJOtherQuanZiView: UIView,UITableViewDelegate,UITableViewDataSource,MAMapV
         }
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = UIColor.darkGrayColor()
+
         
         
-        mapView.frame = CGRectMake(ScreenWidth,
-                                   0,
-                                   ScreenWidth,
-                                   ScreenHeight-ScreenHeight/3)
+       
         mapView.tag = 10
-        mapView.delegate = self
+      
         self .addSubview(mapView)
-        
+        mapView.snp_makeConstraints { (make) in
+            make.left.equalTo(ScreenWidth)
+            make.right.equalTo(ScreenWidth)
+            make.top.equalTo(0)
+            make.bottom.equalTo(whiteView.snp_top)
+        }
+          mapView.delegate = self
 //        mapView.showsUserLocation = true
         //MARK:自定义经纬度
         annotations = NSMutableArray()
@@ -92,22 +97,27 @@ class MJOtherQuanZiView: UIView,UITableViewDelegate,UITableViewDataSource,MAMapV
         //逆地理编码
         reGeocodeAction()
         
-        //动画
-        UIView.animateWithDuration(0.5, delay: 0,
-                                   options: .LayoutSubviews,
-                                   animations: {
-            self.whiteView.frame = CGRectMake(0, ScreenHeight/3*2,
-                                            ScreenWidth ,ScreenHeight/3 )
-            }, completion: nil)
-        
-        UIView.animateWithDuration(0.5) {
-           self.mapView.frame = CGRectMake(0,
-                                       0,
-                                       ScreenWidth,
-                                       ScreenHeight-ScreenHeight/3)
-        }
+        changeFrameAnimate(0.5)
  
 
+    }
+    func changeFrameAnimate(duration:NSTimeInterval)  {
+        //动画
+        
+        UIView.animateWithDuration(duration, delay: 0,
+                                   options: .LayoutSubviews,
+                                   animations: {
+                                    self.whiteView.frame = CGRectMake(0, ScreenHeight/3*2,
+                                        ScreenWidth ,ScreenHeight/3 )
+            }, completion: nil)
+        
+        UIView.animateWithDuration(duration) {
+            self.mapView.snp_remakeConstraints(closure: { (make) in
+                make.left.right.equalTo(0)
+                make.top.equalTo(0)
+                make.bottom.equalTo(self.whiteView.snp_top)
+            })
+        }
     }
     //MARK: - Action Handle
     
@@ -156,7 +166,7 @@ class MJOtherQuanZiView: UIView,UITableViewDelegate,UITableViewDataSource,MAMapV
                     annotation.subtitle = "accuracy:\(location.horizontalAccuracy)m"
                 }
                 
-                self?.addAnnotationsToMapView(annotation)
+               self?.addAnnotationsToMapView(annotation) 
 
             }
             
@@ -164,7 +174,6 @@ class MJOtherQuanZiView: UIView,UITableViewDelegate,UITableViewDataSource,MAMapV
     }
     //添加大头针
     func addAnnotationsToMapView(annotation: MAAnnotation) {
-        
         mapView .addAnnotations(annotations as [AnyObject])
         mapView.addAnnotation(annotation)
         mapView.selectAnnotation(annotation, animated: true)
@@ -183,14 +192,13 @@ class MJOtherQuanZiView: UIView,UITableViewDelegate,UITableViewDataSource,MAMapV
         if cell == nil{
             cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "cell")
         }
-        
         cell!.imageView?.image = UIImage(named: "img_message_2x")
         cell!.textLabel?.text = "亚太跆拳道"
         cell!.detailTextLabel?.text = "156 人正在热论"
         let btn = UIButton(type: .Custom)
         btn.frame = CGRectMake(0, 0,50, 20)
         btn.setTitle("加入", forState: .Normal)
-        btn.titleLabel?.font = UIFont.systemFontOfSize(12)
+        btn.titleLabel?.font = UIFont.systemFontOfSize(kSmallScaleOfFont)
         btn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         btn.backgroundColor = UIColor(red: 0, green: 125 / 255, blue: 255 / 255, alpha: 1)
         btn.layer.cornerRadius = 10
@@ -206,79 +214,63 @@ class MJOtherQuanZiView: UIView,UITableViewDelegate,UITableViewDataSource,MAMapV
     }
     //MARK:自定义大头针
     func mapView(mapView: MAMapView!, viewForAnnotation annotation: MAAnnotation!) -> MAAnnotationView! {
-        
-
+        //绿色的大头针
             if annotation.isKindOfClass(MJGreenAnnotation) {
-                let pointReuseIndetifier = "pointReuseIndetifier"
+                let greenReuseIndetifier = "pointReuseIndetifier"
                 
-                var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(pointReuseIndetifier)
-                if annotationView == nil {
-                    annotationView = MJGreenAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
+                var greenAnnotation = mapView.dequeueReusableAnnotationViewWithIdentifier(greenReuseIndetifier)
+                if greenAnnotation == nil {
+                    greenAnnotation = MJGreenAnnotationView(annotation: annotation, reuseIdentifier: greenReuseIndetifier)
                 }
-                
-                annotationView?.canShowCallout  = true
-                annotationView?.draggable       = true
-                annotationView?.image = UIImage(named: "img_putongquanzi")
-                return annotationView
+                greenAnnotation?.canShowCallout  = true
+                greenAnnotation?.draggable       = true
+                return greenAnnotation
             }
-        
+        //红色的大头针
         if annotation.isKindOfClass(MJRedAnnotation) {
             let redReuseIndetifier = "red"
             var redAnnotation = mapView.dequeueReusableAnnotationViewWithIdentifier(redReuseIndetifier)
             if redAnnotation == nil {
-                redAnnotation = MJRedAnnotationView(annotation: annotation, reuseIdentifier: redReuseIndetifier)
+                redAnnotation = MJRedAnnotationView(annotation: annotation,reuseIdentifier: redReuseIndetifier)
             }
             return redAnnotation
-
         }
         return nil
     }
-
+    func mapView(mapView: MAMapView!, didSelectAnnotationView view: MAAnnotationView!) {
+        if view.isKindOfClass(MJGreenAnnotationView) {
+            print("选中了绿色")
+        }
+        if view.isKindOfClass(MJRedAnnotationView) {
+            print("选中了红色")
+        }
+    }
     
     //MARK: 定位服务代理
-    
     func amapLocationManager(manager: AMapLocationManager!, didUpdateLocation location: CLLocation!) {
-        NSLog("location:{lat:%f; lon:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
     }
     
     func mapView(mapView: MAMapView!, didUpdateUserLocation userLocation: MAUserLocation!) {
-        
     }
     
     func didUpdateBMKUserLocation(userLocation: MAUserLocation!) {
     
     }
-    func mapView(mapView: MAMapView!, didLongPressedAtCoordinate coordinate: CLLocationCoordinate2D) {
-
-        let pointView = MJGreenAnnotation()
-        pointView.coordinate = coordinate
-        locationManager.requestLocationWithReGeocode(true) { (location:CLLocation!, regeocode:AMapLocationReGeocode!, error:NSError!) in
-            if (regeocode != nil){
-                pointView.title = regeocode.formattedAddress
-//                pointView.subtitle = regeocode.city
-                mapView.delegate = self
-                mapView .addAnnotation(pointView)
-            }
+    //滑动表格出现动画
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        UIView.animateWithDuration(0.5, delay: 0,
+                                   options: .LayoutSubviews,
+                                   animations: {
+                                    self.whiteView.frame = CGRectMake(0, ScreenHeight/3.5,
+                                        ScreenWidth ,ScreenHeight / 2 )
+            }, completion: nil)
+        
+    }
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        //竖向偏移
+        let originY = scrollView.contentOffset.y
+        if originY <= -30 {
+            changeFrameAnimate(0.5)
         }
     }
-    
-    func myAwesomeMethod(placemark: CLPlacemark) {
-       //国家
-        let  country = placemark.country
-        //街道
-        let thoroughfare = placemark.thoroughfare
-//        let name = placemark.name
-//        let subThoroughfare = placemark.subThoroughfare
-        //省市区
-        let locality = placemark.locality
-        //城市
-        let subLocality = placemark.subLocality
-     
-        
-        print("\(country) \(locality) \(subLocality) \(thoroughfare)      ")
-        
-        
-       
-    }
-    
 }

@@ -25,6 +25,7 @@ target 'YueDongQuan' do
        pod 'HYBSnapkitAutoCellHeight', '~> 2.0.0'
 	pod 'AMapLocation', '~> 2.1.1'
 	pod 'AMap2DMap', '~> 4.3.0'
+    pod 'RongCloudIMKit', '~> 2.7.2'
   # Pods for YueDongQuan
 
 

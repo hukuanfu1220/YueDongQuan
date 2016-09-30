@@ -81,9 +81,19 @@ EOM
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "AMap2DMap/MAMapKit.framework/AMap.bundle"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_2_stable/RongCloud.bundle"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_2_stable/en.lproj"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_2_stable/zh-Hans.lproj"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_2_stable/Emoji.plist"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_2_stable/RCConfig.plist"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "AMap2DMap/MAMapKit.framework/AMap.bundle"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_2_stable/RongCloud.bundle"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_2_stable/en.lproj"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_2_stable/zh-Hans.lproj"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_2_stable/Emoji.plist"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_2_stable/RCConfig.plist"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

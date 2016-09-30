@@ -13,5 +13,6 @@ class MJModel: NSObject {
     var VALIDATION_CODE = NSInteger()
     //返回码
     var RESULT_CODE = NSInteger()
-    
+    // 用户ID
+    var uid = ""
 }

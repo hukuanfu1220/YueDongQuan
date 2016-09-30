@@ -23,6 +23,7 @@ PODS:
     - SnapKit (~> 0.18)
   - IQKeyboardManagerSwift (3.3.7)
   - Masonry (1.0.1)
+  - RongCloudIMKit (2.7.2)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - HYBSnapkitAutoCellHeight (~> 2.0.0)
   - IQKeyboardManagerSwift (~> 3.3.4)
   - Masonry (~> 1.0.1)
+  - RongCloudIMKit (~> 2.7.2)
   - SDWebImage (~> 3.8.1)
   - SnapKit (~> 0.30.0.beta2)
   - SwiftyJSON (~> 2.3.2)
@@ -52,12 +54,13 @@ SPEC CHECKSUMS:
   HYBSnapkitAutoCellHeight: a0dccfa71a986d6ce745eed96291a629c3d91cbd
   IQKeyboardManagerSwift: 7d06186460470f3f7e767630861a1303980ee5cf
   Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
+  RongCloudIMKit: 9dcdee89da511bf1fa375ac0646754783cdb9c9e
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SnapKit: c4bb32b1d3c5d18ff63bf95ffcbc599d2bab964c
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   TZImagePickerController: d3b16a1ab3393b251a23fbb22ac2d6bc83a50d5f
   XHImageViewer: 7b275d2aa829e56761c30303b9d51cae086a90b9
 
-PODFILE CHECKSUM: e51f3910f5f24dc20591ccce93e2e584adde1e79
+PODFILE CHECKSUM: 9902bc0918aafb5dd981ebff0c51d355d3943717
 
 COCOAPODS: 1.0.1

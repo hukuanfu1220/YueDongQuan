@@ -63,7 +63,7 @@ class SearchController: UIViewController,UICollectionViewDelegate,UICollectionVi
         let InterestLabel = UILabel(frame: CGRect(x: 8, y: 3, width: ScreenWidth/2, height: 20))
         InterestLabel.textColor = UIColor.grayColor()
         InterestLabel.text = "你可能感兴趣的圈子"
-        InterestLabel.font = UIFont.systemFontOfSize(10)
+        InterestLabel.font = UIFont.systemFontOfSize(kSmallScaleOfFont)
         scrollView.addSubview(InterestLabel)
         
         let lineView = UIView(frame: CGRect(x: 8, y: CGRectGetMaxY(InterestLabel.frame), width: ScreenWidth - 16, height: 1))

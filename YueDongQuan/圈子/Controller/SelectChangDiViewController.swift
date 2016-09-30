@@ -64,7 +64,7 @@ class SelectChangDiViewController: MainViewController,UITableViewDelegate,UITabl
         cell?.imageView?.image = UIImage(named: "img_message_2x")
         cell?.textLabel?.text = "重庆江南体育馆"
         cell?.detailTextLabel?.text = "离你 300m"
-        cell?.detailTextLabel?.font = UIFont.systemFontOfSize(14)
+        cell?.detailTextLabel?.font = UIFont.systemFontOfSize(kMidScaleOfFont)
         cell?.textLabel?.textColor = UIColor.grayColor()
        let btn = MHRadioButton(groupId: "firstGroup", atIndex: 0)
         MHRadioButton.addObserver(self, forFroupId: "firstGroup")

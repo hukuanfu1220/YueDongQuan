@@ -23,8 +23,9 @@
 #import "CustomTextField.h"
 #import "HKFPostVideoVC.h"
 #import "BRPlaceholderTextView.h"
-
-
+    //融云SDK
+#import <RongIMKit/RongIMKit.h>
+#import "ConversationListViewController.h"
 
 
 #import "YJTabBar.h"

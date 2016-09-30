@@ -61,7 +61,7 @@ class ConfirmOldPw: UIView {
         //标题
         titleLabel.frame = CGRect(x: 0, y: 15, width: width, height: 25)
         titleLabel.textColor = RGB_Color(r: 66, g: 66, b: 66, a: 1)
-        titleLabel.font = UIFont.systemFontOfSize(19)
+        titleLabel.font = UIFont.systemFontOfSize(kTopScaleOfFont)
         titleLabel.textAlignment = .Center
         whiteView.addSubview(titleLabel)
         //内容
@@ -69,7 +69,7 @@ class ConfirmOldPw: UIView {
         contentLabel.numberOfLines = 0
         contentLabel.textAlignment = .Center
         contentLabel.textColor = RGB_Color(r: 66, g: 66, b: 66, a: 1)
-        contentLabel.font = UIFont.systemFontOfSize(18)
+        contentLabel.font = UIFont.systemFontOfSize(kTopScaleOfFont)
         whiteView.addSubview(contentLabel)
         passWord.frame = CGRectMake(24, 90, width-48, 30)
         whiteView .addSubview(passWord)
@@ -78,7 +78,7 @@ class ConfirmOldPw: UIView {
         cancelBtn.frame = CGRect(x: width-btnWith*2, y: 165, width: btnWith, height: 20)
         cancelBtn.backgroundColor = UIColor.whiteColor()
         cancelBtn.setTitleColor(RGB_Color(r: 150, g: 150, b: 150, a: 1), forState: UIControlState.Normal)
-        cancelBtn.titleLabel?.font = UIFont.systemFontOfSize(18)
+        cancelBtn.titleLabel?.font = UIFont.systemFontOfSize(kTopScaleOfFont)
         cancelBtn.layer.cornerRadius = 3
         cancelBtn.clipsToBounds = true
         cancelBtn.tag = 1
@@ -88,7 +88,7 @@ class ConfirmOldPw: UIView {
         sureBtn.frame = CGRect(x: width-btnWith , y: 165, width: btnWith, height: 20)
         sureBtn.backgroundColor = UIColor.whiteColor()
         sureBtn.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
-        sureBtn.titleLabel?.font = UIFont.systemFontOfSize(18)
+        sureBtn.titleLabel?.font = UIFont.systemFontOfSize(kTopScaleOfFont)
         sureBtn.layer.cornerRadius = 3
         sureBtn.clipsToBounds = true
         sureBtn.tag = 2

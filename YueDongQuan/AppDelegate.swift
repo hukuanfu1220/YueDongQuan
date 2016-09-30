@@ -19,9 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.window = UIWindow(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height))
-        
+        //高德地图
         AMapServices.sharedServices().apiKey = "cc7ada21dae93efe53c70dc7d6a46598"
-        
+        //融云
+        RCIM.sharedRCIM().initWithAppKey("e0x9wycfxegoq")
+        let login = MJLoginOpreationHelper()
         
         
         

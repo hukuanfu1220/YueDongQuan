@@ -39,7 +39,7 @@ class SearchResultCell: UITableViewCell {
         }
         fieldName.text = "重庆江南体育馆"
         fieldName.textColor = UIColor.blackColor()
-        fieldName.font = UIFont.systemFontOfSize(13)
+        fieldName.font = UIFont.systemFontOfSize(kSmallScaleOfFont)
         
         fieldPerson.snp_makeConstraints { (make) in
             make.left.equalTo(fieldImage.snp_right).offset(5)
@@ -50,7 +50,7 @@ class SearchResultCell: UITableViewCell {
         
         fieldPerson.text = "129人正在讨论"
         fieldPerson.textColor = UIColor.lightGrayColor()
-        fieldPerson.font = UIFont.systemFontOfSize(10)
+        fieldPerson.font = UIFont.systemFontOfSize(kSmallScaleOfFont)
         
         
     }

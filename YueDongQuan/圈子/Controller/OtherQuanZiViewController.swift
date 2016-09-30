@@ -12,27 +12,26 @@ class OtherQuanZiViewController: MainViewController{
     var  otherView : MJOtherQuanZiView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
        otherView  = MJOtherQuanZiView(frame: self.view.frame)
         self.view  = otherView
         otherView.mapView.setZoomLevel(20, animated: true)
     }
 
     override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(true)
+        super.viewWillDisappear(animated)
         otherView.locationManager.stopUpdatingLocation()
+        self.navigationController?.tabBarController?.hidesBottomBarWhenPushed = false
+
     }
     override func viewDidAppear(animated: Bool) {
         otherView.locationManager.startUpdatingLocation()
-//        otherView.mapView.delegate = self
-//        otherView.mapView .addAnnotations(otherView.annotations as [AnyObject])
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     override func viewWillAppear(animated: Bool) {
-        
+        super.viewWillAppear(animated)
+        self.navigationController?.tabBarController?.hidesBottomBarWhenPushed = true
     }
 
     /*

@@ -8,8 +8,17 @@
 
 import UIKit
 
-class ChatViewController: MainViewController {
-
+class ChatViewController: ConversationListViewController {
+    
+    typealias clickButton = (ButtonTag: Int) -> Void //声明闭包，点击按钮传值
+    //把申明的闭包设置成属性
+    var clickClosure: clickButton?
+    //为闭包设置调用函数
+    func clickButtonTagClosure(closure:clickButton?){
+        //将函数指针赋值给myClosure闭包
+        clickClosure = closure
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.clickButtonTagClosure { (ButtonTag) in
@@ -38,5 +47,26 @@ class ChatViewController: MainViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    func clickBtnAction(sender: UIButton) {
+        
+        if (clickClosure != nil) {
+            clickClosure!(ButtonTag: sender.tag)
+        }
+        print("点击了",sender.tag)
+        
+    }
+    override func onSelectedTableRow(conversationModelType: RCConversationModelType, conversationModel model: RCConversationModel!, atIndexPath indexPath: NSIndexPath!) {
+
+        let conversationVC = RCConversationViewController()
+        conversationVC.conversationType = model.conversationType
+        conversationVC.userName = model.targetId
+        conversationVC.title = model.conversationTitle
+        push(conversationVC)
+    }
+    func push(viewController:UIViewController)  {
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    func pop()  {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
 }
