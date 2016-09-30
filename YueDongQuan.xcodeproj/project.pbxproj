@@ -32,6 +32,7 @@
 		5C343A041D91366F0077BFDD /* SignRankBtnController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C343A031D91366F0077BFDD /* SignRankBtnController.swift */; };
 		5C3B9A011D9D0A0400AF7CFE /* QuanZiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3B9A001D9D0A0400AF7CFE /* QuanZiCell.swift */; };
 		5C3B9A031D9D17A900AF7CFE /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3B9A021D9D17A900AF7CFE /* SearchResultCell.swift */; };
+		5C4396D01D9E135200F40749 /* SourceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4396CF1D9E135200F40749 /* SourceAnimation.swift */; };
 		5C8C3C651D9276F500D756FF /* SignSportsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8C3C641D9276F500D756FF /* SignSportsCell.swift */; };
 		5C8C3C671D92771600D756FF /* SignPersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8C3C661D92771600D756FF /* SignPersonCell.swift */; };
 		5C8C3C691D927FAD00D756FF /* SignCellForHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8C3C681D927FAD00D756FF /* SignCellForHeader.swift */; };
@@ -155,6 +156,7 @@
 		5C343A031D91366F0077BFDD /* SignRankBtnController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignRankBtnController.swift; sourceTree = "<group>"; };
 		5C3B9A001D9D0A0400AF7CFE /* QuanZiCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuanZiCell.swift; path = "YueDongQuan/搜索/View/QuanZiCell.swift"; sourceTree = SOURCE_ROOT; };
 		5C3B9A021D9D17A900AF7CFE /* SearchResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
+		5C4396CF1D9E135200F40749 /* SourceAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceAnimation.swift; sourceTree = "<group>"; };
 		5C8C3C641D9276F500D756FF /* SignSportsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignSportsCell.swift; sourceTree = "<group>"; };
 		5C8C3C661D92771600D756FF /* SignPersonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignPersonCell.swift; sourceTree = "<group>"; };
 		5C8C3C681D927FAD00D756FF /* SignCellForHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignCellForHeader.swift; sourceTree = "<group>"; };
@@ -654,6 +656,7 @@
 				BFA6DDC51D895C11009017DE /* UIControl+Custom.h */,
 				BFA6DDC61D895C11009017DE /* UIControl+Custom.m */,
 				BFC65D531D86A199004E7E99 /* CustomActionSheet */,
+				5C4396CF1D9E135200F40749 /* SourceAnimation.swift */,
 			);
 			path = "第三方";
 			sourceTree = "<group>";
@@ -894,6 +897,7 @@
 				5C2A956C1D8D86B2006D1462 /* CellModel.m in Sources */,
 				BF071F431D9A10DA000551F7 /* QuanZiViewController.swift in Sources */,
 				BF071F381D9A0D68000551F7 /* MJAlertView.swift in Sources */,
+				5C4396D01D9E135200F40749 /* SourceAnimation.swift in Sources */,
 				5CA4EA401D8EC5EE001A8E8D /* FieldCell.swift in Sources */,
 				BF071F3E1D9A0D68000551F7 /* SendPhoneNumberView.swift in Sources */,
 				BF071F2E1D9A0D68000551F7 /* SendPhoneViewController.swift in Sources */,
