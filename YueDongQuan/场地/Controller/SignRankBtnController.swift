@@ -37,25 +37,28 @@ class SignRankBtnController: UIViewController,SignHeaderViewDelegate {
         
         timer = XTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(backgroundThreadFire), userInfo: nil, repeats: true)
         
-        timer.stop()
         
+    }
+    
+    func clickTimeStatusBtn(sender: UIButton) {
+        if sender.selected == true {
+           timer.stop()
+        }else{
+            timer.reStart()
+        }
     }
     
     func clickSignBtn(sender: UIButton) {
         NSLog("sender:\(sender.selected)")
         
-        if sender.selected == true
-        {
-            timer.reStart()
-            imgView.image = UIImage(named: "")
-            imgView.userInteractionEnabled = false
+        
+        
             
-        }else{
+        
             imgView.image = UIImage(named: "ic_lanqiu")
             imgView.userInteractionEnabled = true
-            timer.stop()
             timer.invalidate()
-        }
+        
         
         
         
@@ -132,6 +135,9 @@ class SignRankBtnController: UIViewController,SignHeaderViewDelegate {
     
     override func viewWillAppear(animated: Bool) {
         setNav()
+        
+        imgView.image = UIImage(named: "")
+        imgView.userInteractionEnabled = false
 
     }
     override func viewWillDisappear(animated: Bool) {

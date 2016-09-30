@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 
 protocol SignHeaderViewDelegate {
+    func clickTimeStatusBtn(sender:UIButton)
     func clickSignBtn(sender : UIButton)
 }
 
@@ -17,6 +18,7 @@ class SignHeaderView: UIView {
     
     var delegate : SignHeaderViewDelegate?
     
+    var timeStatus = UILabel()//暂停还是继续
     
     var yesterDay = UILabel()
     var yesterdayCount = UILabel()
@@ -88,11 +90,9 @@ class SignHeaderView: UIView {
         yesterdayCount.textAlignment = .Center
         
         cicleView = CircleAnimation(frame: CGRect(x: 0, y: 0, width: ScreenWidth/2, height: ScreenWidth/2))
-        
+        cicleView.width = 4
         self.addSubview(cicleView)
 
-
-        
         
         toDay.snp_makeConstraints { (make) in
             make.right.equalTo(0)
@@ -126,7 +126,7 @@ class SignHeaderView: UIView {
             make.width.equalTo(60)
             make.height.equalTo(20)
         }
-        
+        sportStatus.userInteractionEnabled = false
         sportStatus.text = "未运动"
         sportStatus.font = UIFont.systemFontOfSize(12)
         sportStatus.textAlignment = .Center
@@ -138,6 +138,7 @@ class SignHeaderView: UIView {
             make.width.equalTo(ScreenWidth/2 - 40)
             make.height.equalTo(30)
         }
+        sportTime.userInteractionEnabled = false
         
         let sportTimeAttributeString = NSMutableAttributedString(string: toDayTime + "秒")
         sportTimeAttributeString.beginEditing()
@@ -157,7 +158,7 @@ class SignHeaderView: UIView {
         }
         
         signBtn.backgroundColor = UIColor ( red: 0.8275, green: 0.9216, blue: 0.8627, alpha: 1.0 )
-        signBtn.setTitle("签到", forState: UIControlState.Normal)
+        signBtn.setTitle("签退", forState: UIControlState.Normal)
         signBtn.setTitleColor(UIColor ( red: 0.4784, green: 0.7176, blue: 0.5529, alpha: 1.0 ), forState: UIControlState.Normal)
         signBtn.layer.masksToBounds = true
         signBtn.layer.cornerRadius = 5
@@ -182,18 +183,50 @@ class SignHeaderView: UIView {
         expendCaloric.attributedText = str
         expendCaloric.textAlignment = .Center
         
+        timeStatus = UILabel(frame: CGRect(x: 0, y: 0, width: ScreenWidth/2, height: 40))
+        timeStatus.center = self.center
+        timeStatus.alpha = 0.5
+        timeStatus.adjustsFontSizeToFitWidth = true
+        timeStatus.textAlignment = .Center
+        timeStatus.text = "暂停"
+        self.addSubview(timeStatus)
+        
+        
+        
+        
+        let zanTingBtn = UIButton(frame: CGRect(x: 0, y: 0, width: ScreenWidth/2, height: ScreenWidth/2))
+        zanTingBtn.center = self.center
+        zanTingBtn.addTarget(self, action: #selector(clickZanTingBtn(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        zanTingBtn.backgroundColor = UIColor.clearColor()
+        
+        self.addSubview(zanTingBtn)
+        
     }
     
-    func clickSignBtn(sender : UIButton){
-        NSLog("点击签到按钮进行计时\(sender.selected)")
+    func clickZanTingBtn(sender:UIButton) {
+        NSLog("xxxxxxxxxx\(sender.selected)")
         
         if sender.selected == false {
-            signBtn.setTitle("签退", forState: UIControlState.Normal)
+            let tempLabel = SourceAnimation(frame: CGRect(x: 0, y: 0, width: ScreenWidth/2, height: 40))
+            tempLabel.center = self.center
+            tempLabel.fromSourceAndToSource("点击中心继续计时", source2: "")
         }else{
-            signBtn.setTitle("签到", forState: UIControlState.Normal)
+            let tempLabel = SourceAnimation(frame: CGRect(x: 0, y: 0, width: ScreenWidth/2, height: 40))
+            tempLabel.center = self.center
+            tempLabel.fromSourceAndToSource("点击中心立即暂停", source2: "")
         }
         
         sender.selected = !sender.selected
+        self.delegate?.clickTimeStatusBtn(sender)
+        
+    }
+    
+    func clickSignBtn(sender : UIButton){
+        
+        
+        let tempLabel = SourceAnimation(frame: CGRect(x: 0, y: 0, width: ScreenWidth/2, height: 40))
+        tempLabel.center = self.center
+        tempLabel.fromSourceAndToSource("点击中心立即暂停", source2: "")
         self.delegate?.clickSignBtn(sender)
         
         
