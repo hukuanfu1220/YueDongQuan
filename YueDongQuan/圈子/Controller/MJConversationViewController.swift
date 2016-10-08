@@ -26,6 +26,9 @@ class MJConversationViewController: RCConversationViewController {
                 let notice = QuanZiSettingViewController()
                 self.push(notice)
             }
+            if ButtonTag == 2{
+                self.push(publishNoticeViewController())
+            }
         }
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]

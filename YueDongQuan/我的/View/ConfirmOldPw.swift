@@ -11,7 +11,7 @@ import UIKit
 class ConfirmOldPw: UIView {
 
     
-    typealias clickAlertClosure = (index: Int) -> Void //声明闭包，点击按钮传值
+    typealias clickAlertClosure = (index: Int,password:NSString) -> Void //声明闭包，点击按钮传值
     //把申明的闭包设置成属性
     var clickClosure: clickAlertClosure?
     //为闭包设置调用函数
@@ -30,6 +30,11 @@ class ConfirmOldPw: UIView {
     let cancelBtn = UIButton() //取消按钮
     let sureBtn = UIButton() //确定按钮
     let tap = UITapGestureRecognizer() //点击手势
+    
+    //旧密码
+    var oldString : NSString!
+    
+    
     
     init(title: String?, message: String?, cancelButtonTitle: String?, sureButtonTitle: String?) {
         super.init(frame: CGRect(x: 0, y: 0, width: screen_width, height: screen_height))
@@ -72,6 +77,7 @@ class ConfirmOldPw: UIView {
         contentLabel.font = UIFont.systemFontOfSize(kTopScaleOfFont)
         whiteView.addSubview(contentLabel)
         passWord.frame = CGRectMake(24, 90, width-48, 30)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(passwordMask), name: UITextFieldTextDidChangeNotification, object: nil)
         whiteView .addSubview(passWord)
         //取消按钮
         let btnWith = (width - 130) / 2/2
@@ -82,23 +88,26 @@ class ConfirmOldPw: UIView {
         cancelBtn.layer.cornerRadius = 3
         cancelBtn.clipsToBounds = true
         cancelBtn.tag = 1
-        cancelBtn.addTarget(self, action: #selector(clickBtnAction(_:)), forControlEvents: .TouchUpInside)
+        cancelBtn.addTarget(self, action: #selector(clickBtnAction), forControlEvents: .TouchUpInside)
         whiteView.addSubview(cancelBtn)
         //确认按钮
         sureBtn.frame = CGRect(x: width-btnWith , y: 165, width: btnWith, height: 20)
         sureBtn.backgroundColor = UIColor.whiteColor()
-        sureBtn.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
+        sureBtn.setTitleColor(kBlueColor, forState: UIControlState.Normal)
         sureBtn.titleLabel?.font = UIFont.systemFontOfSize(kTopScaleOfFont)
         sureBtn.layer.cornerRadius = 3
         sureBtn.clipsToBounds = true
         sureBtn.tag = 2
-        sureBtn.addTarget(self, action: #selector(clickBtnAction(_:)), forControlEvents: .TouchUpInside)
+        sureBtn.addTarget(self, action: #selector(clickBtnAction), forControlEvents: .TouchUpInside)
         whiteView.addSubview(sureBtn)
     }
-    //MARK:按键的对应的方法
+    //MARK:按键的对应的方法 输入密码结束时的通知方法
     func clickBtnAction(sender: UIButton) {
+        self.endEditing(true)
+        
         if (clickClosure != nil) {
-            clickClosure!(index: sender.tag)
+         
+            clickClosure!(index: sender.tag,password:oldString)
         }
         dismiss()
     }
@@ -126,6 +135,10 @@ class ConfirmOldPw: UIView {
     func RGB_Color(r r: CGFloat, g:CGFloat, b:CGFloat, a: CGFloat) -> UIColor {
         return UIColor.init(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: a)
     }
-
+    
+    func passwordMask(fication:NSNotification)  {
+        let textFeild = fication.object as! UITextField
+        oldString = textFeild.text!
+    }
 
 }

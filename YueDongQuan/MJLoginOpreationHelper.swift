@@ -9,9 +9,8 @@
 import UIKit
 
 class MJLoginOpreationHelper: NSObject,RCIMUserInfoDataSource{
-
+    //融云登录的token
     let mjToken = MJGetToken()
-    
     var loginClourse : ((isLogin:Bool,userId:NSString) -> Void)?
     var errorLoginClourse : ((isLogin:Bool,errorValue:Int)->Void)?
     override init() {
@@ -60,4 +59,5 @@ class MJLoginOpreationHelper: NSObject,RCIMUserInfoDataSource{
         return completion(user)
         
     }
+    
 }

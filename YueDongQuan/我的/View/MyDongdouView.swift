@@ -21,7 +21,7 @@ class MyDongdouView: UIView {
     lazy var todaTongDou = UIButton()
     //历史动豆
     lazy var histroyDongdou = UIButton()
-//     var ref = MJContextRef()
+
     var numberStr = NSString()
 
     typealias clickAlertClosure = (index: Int) -> Void //声明闭包，点击按钮传值
@@ -108,11 +108,11 @@ class MyDongdouView: UIView {
         }
         todaTongDou.tag = 1
         todaTongDou.setTitle("今日动豆", forState: UIControlState.Normal)
-        todaTongDou.setTitleColor(UIColor.yellowColor(), forState: UIControlState.Normal)
-        todaTongDou.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Selected)
+        todaTongDou.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        todaTongDou.setTitleColor(UIColor.yellowColor(), forState: UIControlState.Selected)
+        todaTongDou .addTarget(self, action: #selector(clickBtn(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         todaTongDou.backgroundColor = UIColor.blackColor()
         todaTongDou.alpha = 0.2
-        todaTongDou .addTarget(self, action: #selector(clickBtn(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         //历史动豆
         self .addSubview(histroyDongdou)
         histroyDongdou.snp_makeConstraints { (make) in
@@ -124,8 +124,8 @@ class MyDongdouView: UIView {
         histroyDongdou.tag = 2
         histroyDongdou .addTarget(self, action: #selector(clickBtn(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         histroyDongdou.setTitle("历史动豆", forState: UIControlState.Normal)
-        histroyDongdou.setTitleColor(UIColor.yellowColor(), forState: UIControlState.Normal)
-        histroyDongdou.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Selected)
+        histroyDongdou.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        histroyDongdou.setTitleColor(UIColor.yellowColor(), forState: UIControlState.Selected)
         histroyDongdou.backgroundColor = UIColor.blackColor()
         histroyDongdou.alpha = 0.2
         

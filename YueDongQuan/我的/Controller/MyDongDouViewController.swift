@@ -67,6 +67,7 @@ class MyDongDouViewController: MainViewController,UITableViewDelegate,UITableVie
 //        histroyDongdouTableView.backgroundColor = UIColor.cyanColor()
         histroyDongdouTableView.scrollEnabled = false
         mainScrollView .addSubview(histroyDongdouTableView)
+        //点击按钮左右滑动
         headBgView!.clickIndexClosure { (index) in
             if index == 1{
                 UIView.animateWithDuration(0.2, animations: {
@@ -75,7 +76,7 @@ class MyDongDouViewController: MainViewController,UITableViewDelegate,UITableVie
                     self.headBgView!.todaTongDou.alpha = 0.5
                     self.headBgView!.histroyDongdou.alpha = 0.2
                     self.mainScrollView.contentOffset = CGPoint(x: 0, y: 0)
-                    print("1",self.mainScrollView.contentOffset.x)
+                    
                 })
             }
             if index == 2{
@@ -84,15 +85,16 @@ class MyDongDouViewController: MainViewController,UITableViewDelegate,UITableVie
                     self.headBgView!.histroyDongdou.alpha = 0.5
                     self.headBgView!.todaTongDou.alpha = 0.2
                     self.mainScrollView.contentOffset = CGPoint(x: ScreenWidth, y: 0)
-                    print("2",self.mainScrollView.contentOffset.x)
+                    
                 })
                 
             }
         }
     }
     override func viewWillAppear(animated: Bool) {
-        headBgView?.todaTongDou.selected = true
         
+        
+
 //        self.navigationController?.navigationBar.setBackgroundImage(UIImage(),
 //                                                                    forBarMetrics: .Default)
 //        

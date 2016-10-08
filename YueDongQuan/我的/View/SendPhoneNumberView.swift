@@ -75,21 +75,23 @@ class SendPhoneNumberView: UIView {
         reSendBtn.setTitle("未收到?重新发送", forState: UIControlState.Normal)
         reSendBtn.titleLabel?.textAlignment = .Left
         reSendBtn.titleLabel?.adjustsFontSizeToFitWidth = true
-        reSendBtn.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
+        reSendBtn.setTitleColor(kBlueColor, forState: UIControlState.Normal)
         
         let nextWidth = NSInteger(ScreenWidth) - kAvatar_Size*4
         nextStapBtn.snp_makeConstraints { (make) in
             make.width.equalTo(nextWidth)
             make.top.equalTo(reSendBtn.snp_bottom).offset(kGAP)
             make.left.equalTo(kAvatar_Size*2)
-            make.height.equalTo(ScreenHeight/10)
+            make.height.equalTo(ScreenHeight/15)
         }
         nextStapBtn.setTitle("下一步", forState: .Normal)
         nextStapBtn.titleLabel?.adjustsFontSizeToFitWidth = true
-        nextStapBtn.backgroundColor = UIColor.blueColor()
+        nextStapBtn.backgroundColor = kBlueColor
         nextStapBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         nextStapBtn.titleLabel?.font = UIFont.systemFontOfSize(kTopScaleOfFont)
         nextStapBtn.titleLabel?.textAlignment = .Center
+        nextStapBtn.layer.cornerRadius = 5
+        nextStapBtn.layer.masksToBounds = true
     }
     
     required init?(coder aDecoder: NSCoder) {

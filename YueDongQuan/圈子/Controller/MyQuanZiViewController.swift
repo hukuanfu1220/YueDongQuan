@@ -128,6 +128,17 @@ class MyQuanZiViewController: MainViewController,UITableViewDelegate,UITableView
     //MARK:数据来源
     lazy var dataSources:NSMutableDictionary = {
        var dataSources = NSMutableDictionary()
+        
+        let myCircleModel = CircleModel()
+        myCircleModel.uid = NSUserDefaults.standardUserDefaults().objectForKey("uid")as! String
+        let dic = ["VALIDATION_CODE":myCircleModel.VALIDATION_CODE,
+                   "uid":myCircleModel.uid]
+        MJNetWorkHelper().mycircle(mycircle, mycircleModel: dic, success: { (responseDic, success) in
+            
+            }, fail: { (error) in
+                
+        })
+        
         return dataSources
     }()
 

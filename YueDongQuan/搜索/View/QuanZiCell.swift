@@ -40,7 +40,7 @@ class QuanZiCell: UICollectionViewCell {
             make.top.equalTo(quanziImage.snp_bottom).offset(2)
             make.height.equalTo(20)
         }
-        quanziName.backgroundColor = UIColor.blueColor()
+        quanziName.backgroundColor = kBlueColor
         
         comeBtn.snp_makeConstraints { (make) in
             make.left.equalTo(3)

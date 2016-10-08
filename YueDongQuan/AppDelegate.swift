@@ -22,16 +22,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //高德地图
         AMapServices.sharedServices().apiKey = "cc7ada21dae93efe53c70dc7d6a46598"
         //融云
+        
         RCIM.sharedRCIM().initWithAppKey("e0x9wycfxegoq")
-        let login = MJLoginOpreationHelper()
-        
-        
-        
-        
+        //初始化融云即登录
+        MJLoginOpreationHelper()
+
         IQKeyboardManager.sharedManager().enable = true
         
         let dask = NSURLSessionConfiguration.defaultSessionConfiguration()
         let manager = AFURLSessionManager(sessionConfiguration: dask)
+        
         let url = NSURL(string: "http://www.weather.com.cn/data/sk/101010100.html")
         let request = NSURLRequest(URL: url!)
         
@@ -43,7 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
         }
        
-        
+        //ShareSDK
+//        MJShareSDkHelper(isOpen: true)
         
         
         //测试提交

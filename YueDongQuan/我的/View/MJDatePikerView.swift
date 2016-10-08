@@ -11,13 +11,13 @@ import UIKit
 class MJDatePikerView: UIView {
 
     
-    typealias clickAlertClosure = (index: Int) -> Void //声明闭包，点击按钮传值
+    typealias dismissClosure = (dateString:NSString?) -> Void //声明闭包，dismiss时传值
     //把申明的闭包设置成属性
-    var clickClosure: clickAlertClosure?
+    var dismissBlock: dismissClosure?
     //为闭包设置调用函数
-    func clickIndexClosure(closure:clickAlertClosure?){
+    func dismissAlertClosure(closure:dismissClosure?){
         //将函数指针赋值给myClosure闭包
-        clickClosure = closure
+        dismissBlock = closure
     }
     let screen_width = UIScreen.mainScreen().bounds.size.width
     let screen_height = UIScreen.mainScreen().bounds.size.height
@@ -31,11 +31,13 @@ class MJDatePikerView: UIView {
     lazy  var sureBtn = UIButton() //确定按钮
     let tap = UITapGestureRecognizer() //点击手势
     
+    //更新提醒时间文本框
+    let formatter = NSDateFormatter()
+    
     init(title: String?,  cancelButtonTitle: String?, sureButtonTitle: String?) {
         super.init(frame: CGRect(x: 0, y: 0, width: screen_width, height: screen_height))
         createAlertView()
         self.titleLabel.text = title
-        
         self.cancelBtn.setTitle(cancelButtonTitle, forState: .Normal)
         self.sureBtn.setTitle(sureButtonTitle, forState: .Normal)
     }
@@ -53,66 +55,52 @@ class MJDatePikerView: UIView {
         self.addGestureRecognizer(tap)
         //白底
         self.addSubview(whiteView)
-//        whiteView.frame = CGRect(x: 0, y: screen_height/2 - 100, width: screen_width, height: screen_height/3)
         whiteView.snp_makeConstraints { (make) in
             make.bottom.equalTo(0)
             make.height.equalTo(screen_height/3)
             make.left.equalTo(0)
             make.right.equalTo(0)
         }
-        whiteView.backgroundColor = UIColor.whiteColor()
+        
         whiteView.layer.cornerRadius = 5
         whiteView.clipsToBounds = true
         
         whiteView .addSubview(titleLabel)
-//        let width = whiteView.frame.size.width
         let titleHeight = whiteView.frame.size.height/5
         let titleWidth = whiteView.frame.size.width/5
-                        //标题
-//                        titleLabel.frame = CGRect(x: 0, y: 15, width: width, height: 25)
-                        titleLabel.textColor = UIColor.blackColor()
-                        titleLabel.font = UIFont.systemFontOfSize(kTopScaleOfFont)
-                        titleLabel.textAlignment = .Center
-                        titleLabel.snp_makeConstraints { (make) in
-                            make.top.equalTo(0)
-                            make.height.equalTo(titleHeight)
-                            make.left.equalTo(titleWidth*2)
-                            make.right.equalTo(-titleWidth*2)
-                           
-        }
-
-        titleLabel.textAlignment = .Center
         //取消按钮
         whiteView.addSubview(cancelBtn)
         cancelBtn.snp_makeConstraints { (make) in
-            make.top.equalTo(0).offset(15)
+            make.top.equalTo(0)
             make.left.equalTo(0).offset(5)
-            make.right.equalTo(-titleWidth*4)
+            make.width.equalTo(titleWidth)
             make.height.equalTo(titleHeight)
         }
-        cancelBtn.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
+        cancelBtn.setTitle("取消", forState: UIControlState.Normal)
+        cancelBtn.setTitleColor(kBlueColor, forState: UIControlState.Normal)
         cancelBtn.titleLabel?.font = UIFont.systemFontOfSize(kTopScaleOfFont)
         cancelBtn.contentHorizontalAlignment = .Left
         cancelBtn.tag = 1
-        cancelBtn.addTarget(self, action: #selector(clickBtnAction(_:)), forControlEvents: .TouchUpInside)
+       
         //确认按钮
         whiteView.addSubview(sureBtn)
         sureBtn.snp_makeConstraints { (make) in
-            make.top.equalTo(0).offset(15)
+            make.top.equalTo(0)
             make.right.equalTo(-5)
-            make.left.equalTo(titleWidth*4)
+            make.width.equalTo(titleWidth)
             make.height.equalTo(titleHeight)
         }
         sureBtn.backgroundColor = UIColor.redColor()
-        sureBtn.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
+        sureBtn.setTitleColor(kBlueColor, forState: UIControlState.Normal)
         sureBtn.titleLabel?.font = UIFont.systemFontOfSize(kTopScaleOfFont)
         sureBtn.contentHorizontalAlignment = .Right
         sureBtn.tag = 2
-        sureBtn.addTarget(self, action: #selector(clickBtnAction(_:)), forControlEvents: .TouchUpInside)
+        
          //时间选择器
         whiteView .addSubview(datePiker)
+        
         datePiker.snp_makeConstraints { (make) in
-            make.top.equalTo(cancelBtn.snp_bottom)
+            make.top.equalTo(0)
             make.left.right.equalTo(0)
             make.bottom.equalTo(whiteView.snp_bottom)
         }
@@ -123,8 +111,7 @@ class MJDatePikerView: UIView {
     
     //日期选择器响应方法
     func dateChanged(datePicker : UIDatePicker){
-        //更新提醒时间文本框
-        let formatter = NSDateFormatter()
+        
         //日期样式
         formatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
         print(formatter.stringFromDate(datePicker.date))
@@ -133,13 +120,7 @@ class MJDatePikerView: UIView {
 
         
     
-    //MARK:按键的对应的方法
-    func clickBtnAction(sender: UIButton) {
-        if (clickClosure != nil) {
-            clickClosure!(index: sender.tag)
-        }
-        dismiss()
-    }
+    
     //MARK:消失
     func dismiss() {
         UIView.animateWithDuration(0.25, animations: { () -> Void in
@@ -147,6 +128,10 @@ class MJDatePikerView: UIView {
             self.alpha = 0
         }) { (finish) -> Void in
             if finish {
+                if self.dismissBlock != nil{
+                    self.dismissBlock!(dateString:self.formatter.stringFromDate(self.datePiker.date))
+                }
+                
                 self.removeFromSuperview()
             }
         }

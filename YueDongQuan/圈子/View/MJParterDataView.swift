@@ -32,7 +32,7 @@ class MJParterDataView: UIView,UITableViewDelegate,UITableViewDataSource {
         case 0:
               let   cell = SettingCell(style: .Default, reuseIdentifier: "cell")
               cell.headImage.backgroundColor = UIColor.grayColor()
-              cell.bigV.backgroundColor = UIColor.blueColor()
+              cell.bigV.backgroundColor = kBlueColor
               cell.userName.text = "姚明"
               cell.userSex.text = "男"
               cell.userAge.text = "34"

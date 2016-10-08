@@ -95,7 +95,7 @@ class YoYoAlertView: UIView {
         //确认按钮
         sureBtn.frame = CGRect(x: cancelBtn.frame.maxX + 10 , y: 100, width: 50, height: 30)
         sureBtn.backgroundColor = RGB_Color(r: 254, g: 255, b: 255, a: 1.0)
-        sureBtn.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
+        sureBtn.setTitleColor(kBlueColor, forState: UIControlState.Normal)
         sureBtn.titleLabel?.font = UIFont.systemFontOfSize(17)
         sureBtn.layer.cornerRadius = 3
         sureBtn.clipsToBounds = true

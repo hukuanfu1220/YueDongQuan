@@ -9,17 +9,25 @@
 import UIKit
 import SnapKit
 class SettingViewController: MainViewController,UITableViewDelegate,UITableViewDataSource,YXCustomActionSheetDelegate{
-      var settingTableView = UITableView()
+      var settingTableView = UITableView(frame: CGRectZero, style: .Grouped)
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        settingTableView = UITableView(frame: CGRectMake(0, 0, ScreenWidth, ScreenHeight), style: .Grouped)
+
+        self.view .addSubview(settingTableView)
+        settingTableView.snp_makeConstraints { (make) in
+            make.left.right.equalTo(0)
+            make.top.bottom.equalTo(0)
+        }
         settingTableView.delegate = self
         settingTableView.dataSource = self
-        self.view .addSubview(settingTableView)
+        
     }
-
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.tabBarController?.hidesBottomBarWhenPushed = true
+    }
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController?.tabBarController?.hidesBottomBarWhenPushed = false
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -62,7 +70,7 @@ class SettingViewController: MainViewController,UITableViewDelegate,UITableViewD
              biVcell = tableView.dequeueReusableCellWithIdentifier(cellId) as? SettingCell
             biVcell = SettingCell(style: .Default, reuseIdentifier: cellId)
             biVcell!.headImage.backgroundColor = UIColor.grayColor()
-            biVcell!.bigV.backgroundColor = UIColor.blueColor()
+            biVcell!.bigV.backgroundColor = kBlueColor
             biVcell!.userName.text = "姚明"
             biVcell!.userSex.text = "男"
             biVcell!.userAge.text = "34"
@@ -102,7 +110,12 @@ class SettingViewController: MainViewController,UITableViewDelegate,UITableViewD
                 cell?.textLabel?.text = array[indexPath.row]
                 return cell!
             case 5:
-               
+                let cellId = "cellId"
+                var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
+                if cell == nil {
+                    cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
+                }
+                cell?.accessoryType = .DisclosureIndicator
                 cell?.textLabel?.text = "退出登录"
                 return cell!
         default:
@@ -144,10 +157,17 @@ class SettingViewController: MainViewController,UITableViewDelegate,UITableViewD
                         alertView.removeFromSuperview()
                         let textFeild = ConfirmOldPw(title: "修改密码", message: "请填写原密码", cancelButtonTitle: "取消", sureButtonTitle: "确定")
                         textFeild.show()
-                        textFeild.clickIndexClosure({ (index) in
+                        textFeild.clickIndexClosure({ (index,password) in
                             if index == 2{
-                                let setNewPs = SetNewPasswordViewController()
-                                self.navigationController?.pushViewController(setNewPs, animated: true)
+                              let trueOrFalse = self.validatePassword(password)
+                                if trueOrFalse != true{
+                                    //与旧密码不对，弹出提示框
+                                    let setNewPs = SetNewPasswordViewController()
+                                    self.navigationController?.pushViewController(setNewPs, animated: true)
+                                }else{
+                                    let setNewPs = SetNewPasswordViewController()
+                                    self.navigationController?.pushViewController(setNewPs, animated: true)
+                                }
                             }
                         })
                     }else{
@@ -164,18 +184,34 @@ class SettingViewController: MainViewController,UITableViewDelegate,UITableViewD
         }
         if indexPath.section == 4 {
             if indexPath.row == 2 {
-                let customSheet = YXCustomActionSheet()
-                let contentArray = [["name": "新浪微博", "icon": "sns_icon_3"], ["name": "QQ空间 ", "icon": "sns_icon_5"], ["name": "QQ ", "icon": "sns_icon_4"], ["name": "微信", "icon": "sns_icon_7"], ["name": "朋友圈", "icon": "sns_icon_8"], ["name": "新浪微博", "icon": "sns_icon_3"], ["name": "QQ空间 ", "icon": "sns_icon_5"], ["name": "微信收藏", "icon": "sns_icon_9"]]
-                customSheet.backgroundColor = UIColor.whiteColor()
-                customSheet.delegate = self
-                customSheet.showInView(UIApplication.sharedApplication().keyWindow, contentArray: contentArray)
             }
         }
-        
+        if indexPath.section == 3 {
+          let cached =  MJClearCache()
+            presentViewController(cached.alert, animated: true, completion: { 
+                
+            })
+        }
         
     }
     //MARK: YXCustomActionSheetDelegate
     func customActionSheetButtonClick(btn: YXActionSheetButton!) {
         print("点击了",btn.tag)
+    }
+    //MARK:验证旧密码 返回值:验证是否符合旧密码
+    func validatePassword(oldPassword:NSString)-> Bool  {
+        let oldPwModel = MyInfoModel()
+        oldPwModel.pw = oldPassword as String
+//        oldPwModel.uid = NSUserDefaults.standardUserDefaults().objectForKey("uid")as!String
+        let dic = ["VALIDATION_CODE":oldPwModel.VALIDATION_CODE,
+                   "uid":oldPwModel.uid,
+                   "pw":oldPwModel.pw]
+        var trueOrFalse = true
+        MJNetWorkHelper().judgeOldPassword(oldpw, judgeOldPasswordModel: dic, success: { (responseDic, success) in
+            trueOrFalse = success
+            }) { (error) in
+                
+        }
+      return trueOrFalse
     }
 }

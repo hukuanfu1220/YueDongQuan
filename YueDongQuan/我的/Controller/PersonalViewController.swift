@@ -54,7 +54,16 @@ class PersonalViewController: MainViewController,UITableViewDelegate,UITableView
                 let set = SettingViewController ()
                 self.push(set)
             }
-          
+            if ButtonTag == 1{
+               self.push(TempLeftViewController())
+            }
+            if ButtonTag == 2{
+                let login = YDQLoginRegisterViewController()
+                login.modalPresentationStyle = .PageSheet
+                self.presentViewController(login, animated: true, completion: nil)
+                
+                
+            }
         }
         // 头部视图
         
@@ -65,56 +74,27 @@ class PersonalViewController: MainViewController,UITableViewDelegate,UITableView
         self.view .addSubview(MainBgTableView)
 
     }
-   /*
-    lazy var dataSource:NSMutableArray = {
-        var dataSource = NSMutableArray()
-        dataSource = NSMutableArray()
-        return dataSource
-    }()
     
-    lazy var dateFormatter:NSDateFormatter = {
-    var dateFormatter = NSDateFormatter()
-    dateFormatter = NSDateFormatter()
-    dateFormatter.dateFromString("MM月dd日 hh:mm")
-        
-        return dateFormatter
-    }()
-    lazy var postComment:CommentModel = {
-       var postComment = CommentModel()
-        postComment = CommentModel()
-        return postComment
-    }()
-    */
-    /* 点击左上角按钮 */
-    func ClickLeftButton() {
-       
-    }
-    
-    func clickTheFourButton(buttonTag:UIButton) {
-        
-       
    
-    }
-    //下载数据
-   /* func downloadData()  {
-      
+    //MARK:查询个人信息 下载数据
+    func downloadData()  {
+        let index = 0
+        let myinfoModel = MyInfoModel()
+        myinfoModel.uid = NSUserDefaults.standardUserDefaults().objectForKey("uid")as! String
+        myinfoModel.pageNo = index
+        myinfoModel.pageSize = index + 5
+        //参数
+        let dic = ["VALIDATION_CODE":myinfoModel.VALIDATION_CODE,
+                   "uid":myinfoModel.uid,
+                   "pageNo":myinfoModel.pageNo,
+                   "pageSize":myinfoModel.pageSize]
         dispatch_async(dispatch_get_global_queue(0, 0)) {
             if(self.needRefresh){
-                self.dataSource.removeAllObjects()
-                var fakes = NSMutableArray()
-                fakes = NSMutableArray()
-                for index in 0...11{
+                MJNetWorkHelper().checkMyInfo(myinfo, myInfoModel: dic, success: { (responseDic, success) in
                     
-                 fakes.addObjectsFromArray(self.fakeDatasource as [AnyObject])
-                    
-                }
-                for index in 0...fakes.count-1{
-                    let statusModel:StatusModel = StatusModel.modelWithJSON(fakes[index]) as! StatusModel
-                    let layout = self.layoutWithStatusModel(statusModel, index: index)
-                    self.dataSource .addObject(layout)
-                   
-                }
-                print(self.dataSource)
+                    }, fail: { (error) in
+                        
+                })
             }
             
             dispatch_async(dispatch_get_main_queue(), { 
@@ -123,11 +103,8 @@ class PersonalViewController: MainViewController,UITableViewDelegate,UITableView
         }
     }
 
-    */
-  /*  func layoutWithStatusModel(statusModel:StatusModel, index:NSInteger) -> CellLayout {
-        let layout = CellLayout(statusModel: statusModel, index: index, dateFormatter: self.dateFormatter)
-        return layout
-    }*/
+  
+
     //1.1默认返回一组
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -281,35 +258,7 @@ class PersonalViewController: MainViewController,UITableViewDelegate,UITableView
 
 
     
-    //假数据
- /*   lazy var fakeDatasource:NSArray = {
-       
-        var fakeDatasource = NSArray()
-        fakeDatasource = [  [ "type": "image",
-             "name": "型格志style",
-             "avatarUrl": "http://tp4.sinaimg.cn/5747171147/50/5741401933/0",
-             "content": "春天卫衣的正确打开方式~\n\n\n\n哈哈哈哈,oops~",
-             "date": "1459668442",
-             "imgs": [ "http://ww2.sinaimg.cn/mw690/006gWxKPgw1f2jeloxwhnj30fu0g0ta5.jpg",
-             "http://ww3.sinaimg.cn/mw690/006gWxKPgw1f2jelpn9bdj30b40gkgmh.jpg",
-             "http://ww1.sinaimg.cn/mw690/006gWxKPgw1f2jelriw1bj30fz0g175g.jpg",
-             "http://ww3.sinaimg.cn/mw690/006gWxKPgw1f2jelt1kh5j30b10gmt9o.jpg",
-             "http://ww4.sinaimg.cn/mw690/006gWxKPgw1f2jeluxjcrj30fw0fz0tx.jpg",
-             "http://ww3.sinaimg.cn/mw690/006gWxKPgw1f2jelzxngwj30b20godgn.jpg",
-             "http://ww2.sinaimg.cn/mw690/006gWxKPgw1f2jelwmsoej30fx0fywfq.jpg",
-             "http://ww4.sinaimg.cn/mw690/006gWxKPgw1f2jem32ccrj30xm0sdwjt.jpg",
-             "http://ww4.sinaimg.cn/mw690/006gWxKPgw1f2jelyhutwj30fz0fxwfr.jpg",],
-             "statusID": "8",
-             "commentList": [[ "from": "SIZE潮流生活",
-             "to": "waynezxcv",
-             "content": "nice~使用Gallop。支持异步绘制，让滚动如丝般顺滑。"]],
-             "isLike": (false),
-             "likeList": [ "waynezxcv"]],]
-
-        return fakeDatasource
-    }()
-    */
-    override func didReceiveMemoryWarning() {
+       override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }

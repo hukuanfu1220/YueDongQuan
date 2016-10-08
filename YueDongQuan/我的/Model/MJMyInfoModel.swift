@@ -14,6 +14,9 @@ class MyInfoModel: MJModel {
     var pageNo = NSInteger()
     //每页数量
     var pageSize = NSInteger()
+    
+    var headId = ""
+    
     //姓名 接口名updateName
     var name = ""
     //出生年月 接口名updatebirthday
@@ -22,6 +25,8 @@ class MyInfoModel: MJModel {
     var sex = ""
     //用户旧密码 oldpw
     var pw = ""
+    //新密码
+    var newpw = ""
     //说说ID praise
     var foundid = ""
     //举报类型ID report
