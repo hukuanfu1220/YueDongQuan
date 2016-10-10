@@ -86,13 +86,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_3_stable/zh-Hans.lproj"
   install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_3_stable/Emoji.plist"
   install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_3_stable/RCConfig.plist"
-  install_resource "ShareSDK2/ShareSDK/Core/Resource.bundle"
-  install_resource "ShareSDK2/ShareSDK/Core/zh-Hans.lproj"
-  install_resource "ShareSDK2/ShareSDK/Core/en.lproj"
-  install_resource "ShareSDK2/ShareSDK/Extend/QQConnectSDK/TencentOpenApi_IOS_Bundle.bundle"
-  install_resource "ShareSDK2/ShareSDK/Extend/SinaWeiboSDK/WeiboSDK.bundle"
-  install_resource "ShareSDK2/ShareSDK/UI/ShareSDKFlatShareViewUI.bundle"
-  install_resource "ShareSDK2/ShareSDK/UI/ShareSDKiPadDefaultShareViewUI.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "AMap2DMap/MAMapKit.framework/AMap.bundle"
@@ -101,13 +94,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_3_stable/zh-Hans.lproj"
   install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_3_stable/Emoji.plist"
   install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_3_stable/RCConfig.plist"
-  install_resource "ShareSDK2/ShareSDK/Core/Resource.bundle"
-  install_resource "ShareSDK2/ShareSDK/Core/zh-Hans.lproj"
-  install_resource "ShareSDK2/ShareSDK/Core/en.lproj"
-  install_resource "ShareSDK2/ShareSDK/Extend/QQConnectSDK/TencentOpenApi_IOS_Bundle.bundle"
-  install_resource "ShareSDK2/ShareSDK/Extend/SinaWeiboSDK/WeiboSDK.bundle"
-  install_resource "ShareSDK2/ShareSDK/UI/ShareSDKFlatShareViewUI.bundle"
-  install_resource "ShareSDK2/ShareSDK/UI/ShareSDKiPadDefaultShareViewUI.bundle"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

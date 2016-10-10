@@ -92,10 +92,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-## MOBFoundation
-
-Copyright © 2012-2015 mob
-
 ## Masonry
 
 Copyright (c) 2011-2012 Masonry Team - https://github.com/Masonry
@@ -145,10 +141,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-
-## ShareSDK2
-
-Copyright © 2012-2015 mob
 
 ## SnapKit
 
