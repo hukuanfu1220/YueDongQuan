@@ -35,7 +35,6 @@ class PersonalViewController: MainViewController,UITableViewDelegate,UITableView
         self .creatViewWithSnapKit()
         self.creatViewWithSnapKit("ic_lanqiu", secondBtnImageString: "ic_search", thirdBtnImageString: "ic_shezhi")
         
-        print("ScreenWidth",ScreenWidth)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -56,6 +55,7 @@ class PersonalViewController: MainViewController,UITableViewDelegate,UITableView
             }
             if ButtonTag == 1{
                self.push(TempLeftViewController())
+               
             }
             if ButtonTag == 2{
                 let login = YDQLoginRegisterViewController()

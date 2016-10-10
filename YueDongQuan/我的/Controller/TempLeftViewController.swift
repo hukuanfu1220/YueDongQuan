@@ -27,8 +27,15 @@ class TempLeftViewController: MainViewController {
 //            }) { (error) in
 //                
 //        }
+        self.showMJProgressHUD("我的等待视图")
     }
-    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.tabBarController?.hidesBottomBarWhenPushed = true
+        
+    }
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController?.tabBarController?.hidesBottomBarWhenPushed = false
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -138,6 +138,7 @@
 		BFAD63281D9E3E34006234E1 /* ConversationListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAD63261D9E3E34006234E1 /* ConversationListViewController.m */; };
 		BFAD632A1D9E47BC006234E1 /* MJConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAD63291D9E47BC006234E1 /* MJConversationViewController.swift */; };
 		BFAD632C1D9E4BD0006234E1 /* MJMyInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAD632B1D9E4BD0006234E1 /* MJMyInfoModel.swift */; };
+		BFC572941DA8EB72002E1995 /* MJProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC572931DA8EB72002E1995 /* MJProgressHUD.swift */; };
 		BFC65D1D1D869FD1004E7E99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC65D1C1D869FD1004E7E99 /* AppDelegate.swift */; };
 		BFC65D221D869FD1004E7E99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFC65D201D869FD1004E7E99 /* Main.storyboard */; };
 		BFC65D271D869FD1004E7E99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFC65D251D869FD1004E7E99 /* LaunchScreen.storyboard */; };
@@ -321,6 +322,7 @@
 		BFAD63271D9E3E34006234E1 /* ConversationListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationListViewController.h; sourceTree = "<group>"; };
 		BFAD63291D9E47BC006234E1 /* MJConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MJConversationViewController.swift; sourceTree = "<group>"; };
 		BFAD632B1D9E4BD0006234E1 /* MJMyInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MJMyInfoModel.swift; sourceTree = "<group>"; };
+		BFC572931DA8EB72002E1995 /* MJProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MJProgressHUD.swift; sourceTree = "<group>"; };
 		BFC65D191D869FD1004E7E99 /* YueDongQuan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YueDongQuan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC65D1C1D869FD1004E7E99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFC65D211D869FD1004E7E99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -631,6 +633,14 @@
 			path = "融云IM";
 			sourceTree = "<group>";
 		};
+		BFC5728F1DA8EB04002E1995 /* 等待视图 */ = {
+			isa = PBXGroup;
+			children = (
+				BFC572931DA8EB72002E1995 /* MJProgressHUD.swift */,
+			);
+			path = "等待视图";
+			sourceTree = "<group>";
+		};
 		BFC65D101D869FD1004E7E99 = {
 			isa = PBXGroup;
 			children = (
@@ -832,6 +842,7 @@
 		BFC65D421D86A0C6004E7E99 /* 第三方 */ = {
 			isa = PBXGroup;
 			children = (
+				BFC5728F1DA8EB04002E1995 /* 等待视图 */,
 				BF1E16A71DA74518007985F3 /* 正则匹配 */,
 				BFDB2A891DA5EA4300A65DAD /* SinaWeiboSDK */,
 				5CA4EA341D8E7453001A8E8D /* HYBMasonryAutoCellHeight */,
@@ -1153,6 +1164,7 @@
 				5C343A021D91361C0077BFDD /* KYCircularProgress.swift in Sources */,
 				BFC65D481D86A0F9004E7E99 /* MainViewController.swift in Sources */,
 				BF071F0B1D9A0D5F000551F7 /* MJOtherQuanZiView.swift in Sources */,
+				BFC572941DA8EB72002E1995 /* MJProgressHUD.swift in Sources */,
 				46315B001D882C2300B9D846 /* Pubilc.swift in Sources */,
 				BF071EFA1D9A0D5F000551F7 /* OtherQuanZiViewController.swift in Sources */,
 				BFAD63281D9E3E34006234E1 /* ConversationListViewController.m in Sources */,
