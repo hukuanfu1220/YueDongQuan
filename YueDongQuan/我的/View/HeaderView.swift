@@ -189,7 +189,7 @@ class HeaderView: UIView {
     
     func click(ttag:likeButton)  {
         let kk = PersonalViewController()
-        kk.clickTheFourButton(ttag)
+//        kk.clickTheFourButton(ttag)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

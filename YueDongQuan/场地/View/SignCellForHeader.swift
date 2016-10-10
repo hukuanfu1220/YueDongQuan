@@ -23,7 +23,7 @@ class SignCellForHeader: UIView {
             make.width.equalTo(80)
         }
         
-        titleText.font = UIFont.systemFontOfSize(11)
+        titleText.font = UIFont.systemFontOfSize(kSmallScaleOfFont)
         
         
     }

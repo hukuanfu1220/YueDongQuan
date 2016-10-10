@@ -92,7 +92,7 @@ class MJNoticeCell: UITableViewCell {
             make.bottom.equalTo(self.contentView.snp_bottom)
         }
         deleteBtn.setTitle("删除", forState: UIControlState.Normal)
-        deleteBtn.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        deleteBtn.setTitleColor(kBlueColor, forState: .Normal)
         
         deleteBtn .addTarget(self, action: #selector(clickDelebtn), forControlEvents: UIControlEvents.TouchUpInside)
         

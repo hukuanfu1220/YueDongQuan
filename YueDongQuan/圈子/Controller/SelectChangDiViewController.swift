@@ -9,10 +9,19 @@
 import UIKit
 
 class SelectChangDiViewController: MainViewController,UITableViewDelegate,UITableViewDataSource,MHRadioButtonDelegate{
-  var tableView = UITableView()
+    var tableView = UITableView()
     
     var newChangDi = UIButton()
     var sureSelect = UIButton()
+    //场地名闭包
+    typealias  circleNameBlock = (nameString:NSString) -> Void
+    var nameBlock: circleNameBlock?
+    //闭包方法
+    func nameblock(Block:circleNameBlock?)  {
+        nameBlock = Block
+    }
+    //场馆名字
+    var changGuanName : NSString!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +42,7 @@ class SelectChangDiViewController: MainViewController,UITableViewDelegate,UITabl
             make.width.equalTo(ScreenWidth/2)
         }
         newChangDi.setTitle("新建场地", forState: UIControlState.Normal)
-        newChangDi.backgroundColor = UIColor.blueColor()
+        newChangDi.backgroundColor = kBlueColor
         newChangDi.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         
         sureSelect.snp_makeConstraints { (make) in
@@ -43,10 +52,17 @@ class SelectChangDiViewController: MainViewController,UITableViewDelegate,UITabl
             make.bottom.equalTo(0)
         }
         sureSelect.setTitle("确认选择", forState: UIControlState.Normal)
-        sureSelect.backgroundColor = UIColor.blueColor()
+        sureSelect.backgroundColor = kBlueColor
         sureSelect.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        sureSelect .addTarget(self, action: #selector(sureSelectChangguan), forControlEvents: UIControlEvents.TouchUpInside)
     }
-
+   
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.tabBarController?.hidesBottomBarWhenPushed = true
+    }
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController?.tabBarController?.hidesBottomBarWhenPushed = false
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -64,7 +80,7 @@ class SelectChangDiViewController: MainViewController,UITableViewDelegate,UITabl
         cell?.imageView?.image = UIImage(named: "img_message_2x")
         cell?.textLabel?.text = "重庆江南体育馆"
         cell?.detailTextLabel?.text = "离你 300m"
-        cell?.detailTextLabel?.font = UIFont.systemFontOfSize(14)
+        cell?.detailTextLabel?.font = UIFont.systemFontOfSize(kMidScaleOfFont)
         cell?.textLabel?.textColor = UIColor.grayColor()
        let btn = MHRadioButton(groupId: "firstGroup", atIndex: 0)
         MHRadioButton.addObserver(self, forFroupId: "firstGroup")
@@ -83,10 +99,18 @@ class SelectChangDiViewController: MainViewController,UITableViewDelegate,UITabl
     //MARK: 单选按钮选择代理
     func radioButtonSelectedAtIndex(index: UInt, inGroup groupID: String!, button: UIButton!) {
         let cell = button.superview as! UITableViewCell
-        let path = tableView.indexPathForCell(cell)
-        print("index row%d", path?.row);
+//        let path = tableView.indexPathForCell(cell)
+//        circleNameBlock!(nameString:(cell.textLabel?.text)!)
+        changGuanName = cell.textLabel?.text
     }
-    
-
+    //MARK:确定选择场馆
+    func sureSelectChangguan()  {
+        if (nameBlock != nil) {
+            nameBlock!(nameString: changGuanName)
+//            self.navigationController?.popViewControllerAnimated(true)
+        }else{
+            
+        }
+    }
 
 }

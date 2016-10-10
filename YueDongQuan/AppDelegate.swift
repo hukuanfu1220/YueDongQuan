@@ -9,31 +9,29 @@
 import UIKit
 import IQKeyboardManagerSwift
 import AFNetworking
-import Alamofire
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate,BMKGeneralDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var mapManager : BMKMapManager?
+    
     
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.window = UIWindow(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height))
+        //高德地图
+        AMapServices.sharedServices().apiKey = "cc7ada21dae93efe53c70dc7d6a46598"
+        //融云
         
-        mapManager = BMKMapManager()
-        let ret = mapManager?.start("9uKjbXPpHn8x1LSNh1tv90xuDEOTW2os", generalDelegate: self)
-        
-        if ret == false {
-            NSLog("地图开启失败")
-        }
-        
-        
-        
-        
+        RCIM.sharedRCIM().initWithAppKey("e0x9wycfxegoq")
+        //初始化融云即登录
+        MJLoginOpreationHelper()
+
         IQKeyboardManager.sharedManager().enable = true
         
         let dask = NSURLSessionConfiguration.defaultSessionConfiguration()
         let manager = AFURLSessionManager(sessionConfiguration: dask)
+        
         let url = NSURL(string: "http://www.weather.com.cn/data/sk/101010100.html")
         let request = NSURLRequest(URL: url!)
         
@@ -44,15 +42,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BMKGeneralDelegate {
             }) { (NSURLResponse, AnyObject, NSError) in
                 
         }
-        let serializer = AFHTTPRequestSerializer()
-        serializer.requestWithMethod("POST", URLString: "www.baidu.com", parameters: nil, error: nil)
-        
-        Alamofire.request(.GET, url!, parameters:nil)
-            .responseJSON { response -> Void in
-                
-        print("aaa",response.description)
-        }
-        
+       
+        //ShareSDK
+//        MJShareSDkHelper(isOpen: true)
         
         
         //测试提交
@@ -84,7 +76,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate,BMKGeneralDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    func showMJProgressHUD(message:NSString)  {
+        
+        let HUDView = UIView(frame:CGRectMake((ScreenWidth-ScreenWidth*0.7)/2, ScreenHeight, ScreenWidth*0.7, 40) )
+        HUDView.backgroundColor = UIColor(white: 0.400, alpha: 1.0)
+        HUDView.alpha = 0.7
+        self.window?.addSubview(HUDView)
+        
+        UIView.animateWithDuration(1.0) {
+            HUDView.frame = CGRectMake((ScreenWidth-ScreenWidth*0.7)/2, ScreenHeight/1.2, ScreenWidth*0.7, 40)
+        }
+        
+        let subLabel = UILabel(frame: CGRectMake(40, 5, CGRectGetWidth(HUDView.frame)-40, 30))
+        subLabel.text = message as String
+        subLabel.textColor = kBlueColor
+        subLabel.textAlignment = .Left
+        subLabel.font = UIFont.systemFontOfSize(kMidScaleOfFont)
+        HUDView .addSubview(subLabel)
+        
+        //消失
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, __int64_t(1.5)), dispatch_get_main_queue()) {
+            HUDView .removeFromSuperview()
+        }
+        
+    }
 
 }
 

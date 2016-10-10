@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'F7E1694673CC6B464B330897AFA48EBB'
+               BlueprintIdentifier = '5767F9673C400DFC1BCE1426F365C7E0'
                BlueprintName = 'XHImageViewer'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'XHImageViewer.framework'>

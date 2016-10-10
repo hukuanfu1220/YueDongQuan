@@ -9,87 +9,202 @@
 import UIKit
 import SnapKit
 
-class FieldViewController: MainViewController ,BMKMapViewDelegate,BMKLocationServiceDelegate,UITableViewDelegate,UITableViewDataSource{
-    var locationService : BMKLocationService?
+
+class FieldViewController: MainViewController,MAMapViewDelegate,AMapLocationManagerDelegate ,UITableViewDelegate,UITableViewDataSource{
+    
     var scroViewContent : UIScrollView!
     var fieldTable = UITableView()
+    var weatherView = UIView()
     
-    var _mapView: BMKMapView!
+    var _mapView: MAMapView?
+    
+    var zoomCount : Double = 12
+    var manger = AMapLocationManager()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.edgesForExtendedLayout = .None
         
-        scroViewContent = UIScrollView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: ScreenHeight))
-        scroViewContent.showsHorizontalScrollIndicator = true
-        scroViewContent.showsVerticalScrollIndicator = false
-//        scroViewContent.pagingEnabled = true
-        scroViewContent.scrollEnabled = true
-        scroViewContent.backgroundColor = UIColor(red: 234/255, green: 234/255, blue: 243/255, alpha: 1.0)
-        
-        scroViewContent.contentSize = CGSize(width: ScreenWidth, height: ScreenHeight*2 )
-        self.view.addSubview(scroViewContent)
         
         
         
         
         
-        locationService = BMKLocationService()
-        locationService?.delegate = self
-        locationService?.distanceFilter = 10
-        locationService?.desiredAccuracy  = 100
-        locationService?.startUserLocationService()
-        _mapView = BMKMapView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: ScreenWidth))
-        scroViewContent.addSubview(_mapView!)
         
-        _mapView?.showsUserLocation = false;//显示定位图层
-        _mapView.userTrackingMode = BMKUserTrackingModeNone
-        _mapView?.mapPadding = UIEdgeInsetsMake(0, 0, 28, 0)
-        _mapView?.showMapScaleBar = true
-        _mapView?.mapScaleBarPosition = CGPointMake(_mapView.frame.width - 60, _mapView.frame.height - 20)
-        let param = BMKLocationViewDisplayParam()
-        param.accuracyCircleStrokeColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0.5)
-        param.accuracyCircleFillColor = UIColor(red: 0, green: 1, blue: 0, alpha: 0.3)
-        _mapView.updateLocationViewWithParam(param)
         
-        fieldTable = UITableView(frame: CGRect(x: 0, y: _mapView.frame.maxY, width: ScreenWidth, height: ScreenHeight*2 - _mapView.frame.maxY - 49 - 64), style: UITableViewStyle.Grouped)
         
-        scroViewContent.addSubview(fieldTable)
+   
+        _mapView = MAMapView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: ScreenWidth*2/3))
+        _mapView?.delegate = self
+        _mapView?.showsUserLocation = true
+        _mapView?.userTrackingMode = .Follow
+        _mapView?.zoomLevel = 12
+        _mapView?.scaleOrigin = CGPointMake(10, CGRectGetMaxY(_mapView!.frame) - 15)
+        _mapView!.showsCompass = false
+        manger.delegate = self
+        manger.startUpdatingLocation()
+        
 
+        let locationBtn = UIButton(frame: CGRect(x: 20, y: CGRectGetMaxY(_mapView!.frame) - 40, width: 25, height: 25))
+        locationBtn.backgroundColor = UIColor.brownColor()
+        locationBtn.addTarget(self, action: #selector(clickLocationBtn), forControlEvents: UIControlEvents.TouchUpInside)
+        _mapView?.addSubview(locationBtn)
+        
+        let addAndReduceView = UIView(frame: CGRect(x: CGRectGetMaxX(_mapView!.frame) - 40, y: CGRectGetMaxY(_mapView!.frame) - 80, width: 25, height: 51))
+        _mapView!.addSubview(addAndReduceView)
+        
+        let reduceBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+        reduceBtn.backgroundColor = UIColor.blueColor()
+        reduceBtn.addTarget(self, action: #selector(reduceBtnClick), forControlEvents: UIControlEvents.TouchUpInside)
+        addAndReduceView.addSubview(reduceBtn)
+        
+        let addBtn = UIButton(frame: CGRect(x: 0, y: 26, width: 25, height: 25))
+        addBtn.backgroundColor = UIColor.brownColor()
+        addBtn.addTarget(self, action: #selector(addBtnClick), forControlEvents: UIControlEvents.TouchUpInside)
+        addAndReduceView.addSubview(addBtn)
+        
+        
+        
+        
+        
+        
+        
+        
+        fieldTable = UITableView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: ScreenHeight - 49 - 64), style: UITableViewStyle.Grouped)
+        self.view.addSubview(fieldTable)
+        fieldTable.tableHeaderView = _mapView
+        
         fieldTable.registerClass(FieldCell.self, forCellReuseIdentifier: "FieldCell")
         fieldTable.delegate = self
         fieldTable.dataSource = self
         
+        weatherView = UIView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: 30))
+        weatherView.backgroundColor = UIColor ( red: 0.7802, green: 0.7584, blue: 0.7562, alpha: 0.92 )
+        self.view.addSubview(weatherView)
+        
+        let shutBtn = UIButton(frame: CGRect(x: ScreenWidth - 30, y: 5, width: 20, height: 20))
+        shutBtn.setImage(UIImage(named: "photo_delete"), forState: UIControlState.Normal)
+        shutBtn.addTarget(self, action: #selector(dismissWeatherView), forControlEvents: UIControlEvents.TouchUpInside)
+        weatherView.addSubview(shutBtn)
         
         
+    }
+    
+    func dismissWeatherView(){
+        weatherView.removeFromSuperview()
+    }
+    
+    func reduceBtnClick(){
+        if zoomCount > 12 {
+            zoomCount -= 1
+        }else{
+            zoomCount = 12
+        }
+        _mapView?.setZoomLevel(zoomCount, animated: true)
+        
+    }
+    func addBtnClick(){
+        if zoomCount < 20 {
+            zoomCount += 1
+        }
+        _mapView?.setZoomLevel(zoomCount, animated: true)
+    }
+    
+    func clickLocationBtn(){
+        NSLog("点击了定位")
+    }
+    
+    
+    func setNav(){
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_lanqiu"), style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 24.0 / 255, green: 90.0 / 255, blue: 172.0 / 255, alpha: 1.0)
+        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: 65, height: 32))
+        let searchBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
+        searchBtn.setImage(UIImage(named: "ic_search"), forState: UIControlState.Normal)
+        rightView.addSubview(searchBtn)
+        let addBtn = UIButton(frame: CGRect(x: 33, y: 0, width: 32, height: 32))
+        addBtn.setImage(UIImage(named: "ic_search"), forState: UIControlState.Normal)
+        rightView.addSubview(addBtn)
+        addBtn.addTarget(self, action: #selector(clickAddBtn), forControlEvents: UIControlEvents.TouchUpInside)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightView)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        _mapView?.viewWillAppear()
-        _mapView?.delegate = self
+        setNav()
+        
+    }
+    
+    
+    func clickAddBtn() {
+        let searchVC = SearchController()
+        self.navigationController?.pushViewController(searchVC, animated: true)
+        
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        _mapView?.viewWillAppear()
-        _mapView?.delegate = nil
+        
     }
     
-    func didUpdateUserHeading(userLocation: BMKUserLocation!) {
-        NSLog("didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude)
-    }
-    
-    func didUpdateBMKUserLocation(userLocation: BMKUserLocation!) {
-        NSLog("didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude)
-        _mapView?.updateLocationData(userLocation)
-        _mapView.showsUserLocation = true
-        _mapView?.setCenterCoordinate(CLLocationCoordinate2D(latitude: userLocation.location.coordinate.latitude, longitude: userLocation.location.coordinate.longitude), animated: true)
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    /********************************************/
+    
+    func mapView(mapView: MAMapView!, didLongPressedAtCoordinate coordinate: CLLocationCoordinate2D) {
+        NSLog("coordinate = \(coordinate.latitude,coordinate.longitude)")
+    }
+    
+    
+    func amapLocationManager(manager: AMapLocationManager!, didUpdateLocation location: CLLocation!) {
+        _mapView?.setCenterCoordinate(CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude), animated: true)
+    }
+    
+    
+    func mapView(mapView: MAMapView!, didUpdateUserLocation userLocation: MAUserLocation!) {
+        _mapView?.setCenterCoordinate(CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude), animated: true)
+    }
+    
+    func mapView(mapView: MAMapView!, viewForAnnotation annotation: MAAnnotation!) -> MAAnnotationView! {
+        if annotation.isKindOfClass(MAPointAnnotation) {
+            let annotationIdentifier = "invertGeoIdentifier"
+            
+            var poiAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationIdentifier) as? MAPinAnnotationView
+            
+            if poiAnnotationView == nil {
+                poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+            }
+            
+            poiAnnotationView!.animatesDrop   = true
+            poiAnnotationView!.canShowCallout = true
+            
+            return poiAnnotationView;
+        }
+        return nil
+    }
+    
+    func mapView(mapView: MAMapView, rendererForOverlay overlay: MAOverlay) -> MAOverlayRenderer? {
+        
+        if overlay.isKindOfClass(MACircle) {
+            let renderer: MACircleRenderer = MACircleRenderer(overlay: overlay)
+            renderer.fillColor = UIColor.greenColor().colorWithAlphaComponent(0.4)
+            renderer.strokeColor = UIColor.redColor()
+            renderer.lineWidth = 4.0
+            
+            return renderer
+        }
+        
+        return nil
+    }
+     /********************************************/
     
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -125,12 +240,17 @@ class FieldViewController: MainViewController ,BMKMapViewDelegate,BMKLocationSer
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell : FieldCell = tableView.dequeueReusableCellWithIdentifier("FieldCell", forIndexPath: indexPath) as! FieldCell
+        cell.selectionStyle = .None
         cell.index = indexPath
         cell.delegate = self
         return cell
         
     }
 
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+    }
     
 
 }

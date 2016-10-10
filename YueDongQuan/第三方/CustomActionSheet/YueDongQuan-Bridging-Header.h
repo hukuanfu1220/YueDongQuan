@@ -18,13 +18,15 @@
 
 //黄方果导入的
 #import "MHRadioButton.h"
+#import "validateUtils.h"
 //
-
-
-
-
-
-
+#import "HKFPostImageVC.h"
+#import "CustomTextField.h"
+#import "HKFPostVideoVC.h"
+#import "BRPlaceholderTextView.h"
+    //融云SDK
+#import <RongIMKit/RongIMKit.h>
+#import "ConversationListViewController.h"
 
 
 #import "YJTabBar.h"
@@ -40,13 +42,38 @@
 
 
 
-#import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
-#import <BaiduMapAPI_Map/BMKMapComponent.h>//引入地图功能所有的头文件
-#import <BaiduMapAPI_Search/BMKSearchComponent.h>//引入检索功能所有的头文件
-#import <BaiduMapAPI_Cloud/BMKCloudSearchComponent.h>//引入云检索功能所有的头文件
-#import <BaiduMapAPI_Location/BMKLocationComponent.h>//引入定位功能所有的头文件
-#import <BaiduMapAPI_Utils/BMKUtilsComponent.h>//引入计算工具所有的头文件
-#import <BaiduMapAPI_Radar/BMKRadarComponent.h>//引入周边雷达功能所有的头文件
+//高德地图
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <MAMapKit/MAMapKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
+
+
+//#import <ShareSDK/ShareSDK.h>
+////#import <ShareSDKUI/ShareSDK+SSUI.h>
+//#import <ShareSDKConnector/ShareSDKConnector.h>
+//
+//    //腾讯SDK头文件
+//#import <TencentOpenAPI/TencentOAuth.h>
+//#import <TencentOpenAPI/QQApiInterface.h>
+//
+//    //微信SDK头文件
+////#import "WXApi.h"
+//
+////新浪微博SDK头文件
+//#import "WeiboSDK.h"
+//    //人人SDK头文件
+////#import <RennSDK/RennSDK.h>
+//
+//    //Kakao SDK头文件
+////#import <KakaoOpenSDK/KakaoOpenSDK.h>
+//
+//    //支付宝SDK
+////#import "APOpenAPI.h"
+
+
+
+
+
 
 
 

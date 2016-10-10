@@ -8,14 +8,20 @@
 
 import UIKit
 
-class NewQuanZiViewController: MainViewController,UITextFieldDelegate {
+class NewQuanZiViewController: MainViewController,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 lazy var  quanZiImage = UIImageView()
     lazy var quanZiBtn = UIButton()
     var quanZiNameField = MJTextFeild()
     var zhuChangName = MJTextFeild()
+    //上面的线
     var line = UIView()
+    //创建圈子按钮
     var initNewChangDi = UIButton(type: UIButtonType.Custom)
+    //选择场地 是一个透明的按钮
     var clearBtn = UIButton(type: UIButtonType.Custom)
+    //圈子名
+    var circleName : NSString!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,7 +50,8 @@ lazy var  quanZiImage = UIImageView()
         quanZiBtn.setTitle("圈子图片", forState: UIControlState.Normal)
         quanZiBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
         quanZiBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        quanZiBtn.titleLabel?.font = UIFont.systemFontOfSize(14)
+        quanZiBtn.titleLabel?.font = UIFont.systemFontOfSize(kMidScaleOfFont)
+        quanZiBtn .addTarget(self, action: #selector(selectCircleLogo), forControlEvents: UIControlEvents.TouchUpInside)
         self.view .addSubview(quanZiNameField)
         quanZiNameField.snp_makeConstraints { (make) in
             make.left.equalTo(10)
@@ -55,6 +62,7 @@ lazy var  quanZiImage = UIImageView()
        
         let label1 = UILabel(frame:CGRectMake(0, 0, (ScreenWidth-20)/4, 30) )
         label1.text = "圈子名"
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(circleNameSaved), name: UITextFieldTextDidChangeNotification, object: nil)
         quanZiNameField.placeholder = "请填写圈子名"
         quanZiNameField.leftView = label1
         quanZiNameField.leftViewMode = .Always
@@ -89,7 +97,7 @@ lazy var  quanZiImage = UIImageView()
             make.right.equalTo(-10)
             make.bottom.equalTo(quanZiNameField.snp_top)
         }
-        line.backgroundColor = UIColor.blueColor()
+        line.backgroundColor = kBlueColor
         self.view .addSubview(initNewChangDi)
         initNewChangDi.snp_makeConstraints { (make) in
             make.left.equalTo(ScreenWidth/8)
@@ -97,12 +105,12 @@ lazy var  quanZiImage = UIImageView()
             make.top.equalTo(zhuChangName.snp_bottom).offset(ScreenHeight/8)
             make.height.equalTo(ScreenWidth/8)
         }
-        initNewChangDi.backgroundColor = UIColor.blueColor()
+        initNewChangDi.backgroundColor = kBlueColor
         initNewChangDi.layer.cornerRadius = 5
         initNewChangDi.layer.masksToBounds = true
         initNewChangDi.setTitle("创建圈子", forState: UIControlState.Normal)
         initNewChangDi.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        initNewChangDi .addTarget(self, action: nil, forControlEvents: UIControlEvents.TouchUpInside)
+        initNewChangDi .addTarget(self, action: #selector(createNewCircle), forControlEvents: UIControlEvents.TouchUpInside)
     }
     func back(){
         self.navigationController?.popViewControllerAnimated(true)
@@ -111,10 +119,7 @@ lazy var  quanZiImage = UIImageView()
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    //MARK textField Delegate
-//    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-//        
-//    }
+
     func turn()  {
         let select = SelectChangDiViewController()
         self.push(select)
@@ -122,5 +127,90 @@ lazy var  quanZiImage = UIImageView()
 
     override func viewWillAppear(animated: Bool) {
         self.view.endEditing(true)
+        let select = SelectChangDiViewController()
+        select.nameblock { (nameString) in
+            
+        }
     }
+    //MARK:创建新的圈子
+    func selectCircleLogo() {
+        let mjAlertView =  MJAlertView(title: nil, message: nil, cancelButtonTitle: "拍照", sureButtonTitle: "手机选择")
+        mjAlertView.show()
+        mjAlertView.clickIndexClosure({ (index) in
+            if index == 1{
+                //MARK:添加相机
+                self.addCarema()
+            }
+            if index == 2{
+                //MARK:打开本地相册
+                self.openPicLibrary()
+            }
+        })
+ 
+    }
+    func addCarema()  {
+        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            picker.allowsEditing = true
+            picker.sourceType = .Camera
+            self.presentViewController(picker, animated: true, completion: nil)
+        }else{
+            let alert = UIAlertView(title: nil, message: "没有相机", delegate: self, cancelButtonTitle: "好的")
+            alert.show()
+        }
+    }
+    //拍摄完成后要执行的方法
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        //得到图片
+        let dic = info as NSDictionary
+        let image = dic.objectForKey(UIImagePickerControllerOriginalImage) as! UIImage
+        //图片存入相册
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
+        //MARK:更换头像
+        updateUI()
+        
+    }
+    //点击取消
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    func openPicLibrary()  {
+        //相册是可以用模拟器打开
+        if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            picker.allowsEditing = true
+            //打开相册选择照片
+            picker.sourceType = .PhotoLibrary
+            self.presentViewController(picker, animated: true, completion: nil)
+        }else{
+            let alert = UIAlertView(title: nil, message: "没有相机", delegate: self, cancelButtonTitle: "好的")
+            alert.show()
+        }
+    }
+    func updateUI() {
+        let updateheadModel = MyInfoModel()
+        updateheadModel.uid = NSUserDefaults.standardUserDefaults().objectForKey("uid") as! String
+        updateheadModel.headId = ""
+        let dic = ["VALIDATION_CODE":updateheadModel.VALIDATION_CODE,
+                   "uid":updateheadModel.uid,
+                   "headId":updateheadModel.headId]
+        MJNetWorkHelper().updateHeadImage(updatehead, updateHeadImageModel: dic, success: { (responseDic, success) in
+            
+        }) { (error) in
+            
+        }
+    }
+    //MARK:获取圈子名
+    func circleNameSaved(fication:NSNotification)  {
+        let textfield = fication.object
+        circleName = textfield?.text
+    }
+    //MARK:创建圈子操作
+    func createNewCircle()  {
+        
+    }
+
 }

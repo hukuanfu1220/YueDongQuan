@@ -13,7 +13,7 @@ class SendPhoneNumberView: UIView {
     let kAvatar_Size = 40
     lazy var topLabel = UILabel()
     lazy var phoneNumber = UILabel()
-    lazy var yanZhengMaLabel = UILabel()
+    lazy var yanZhengMaLabel = UIButton()
      var yanZhengMaFeild = MJTextFeild()
     lazy var reSendBtn = UIButton()
     lazy var nextStapBtn = UIButton()
@@ -52,14 +52,16 @@ class SendPhoneNumberView: UIView {
             make.height.equalTo(ScreenHeight/10)
             make.width.equalTo(ScreenWidth/4.5)
         }
-        yanZhengMaLabel.text = "验证码"
-        yanZhengMaLabel.textAlignment = .Center
-        yanZhengMaLabel.textColor = UIColor.grayColor()
+        yanZhengMaLabel.setTitle("验证码", forState: UIControlState.Normal)
+        yanZhengMaLabel.titleLabel?.adjustsFontSizeToFitWidth = true
+        yanZhengMaLabel.contentVerticalAlignment = .Bottom
+        yanZhengMaLabel.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
+        yanZhengMaLabel.userInteractionEnabled = false
         self .addSubview(yanZhengMaFeild)
         yanZhengMaFeild.snp_makeConstraints(closure: { (make) in
             make.left.equalTo(yanZhengMaLabel.snp_right)
-            make.top.equalTo(phoneNumber.snp_bottom).offset(ScreenHeight/20)
-            make.height.equalTo(ScreenHeight/20)
+            make.top.equalTo(yanZhengMaLabel.snp_top).offset(ScreenHeight/20/2)
+            make.bottom.equalTo(yanZhengMaLabel.snp_bottom)
             make.right.equalTo(-20)
         })
         yanZhengMaFeild.placeholder = "填写短信验证码"
@@ -68,25 +70,28 @@ class SendPhoneNumberView: UIView {
             make.top.equalTo((yanZhengMaFeild.snp_bottom)).offset(kGAP)
             make.width.equalTo(ScreenWidth/3)
             make.height.equalTo(kGAP*2)
-            make.right.equalTo(0)
+            make.right.equalTo(-10)
         }
         reSendBtn.setTitle("未收到?重新发送", forState: UIControlState.Normal)
         reSendBtn.titleLabel?.textAlignment = .Left
-        reSendBtn.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
+        reSendBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+        reSendBtn.setTitleColor(kBlueColor, forState: UIControlState.Normal)
         
         let nextWidth = NSInteger(ScreenWidth) - kAvatar_Size*4
         nextStapBtn.snp_makeConstraints { (make) in
             make.width.equalTo(nextWidth)
             make.top.equalTo(reSendBtn.snp_bottom).offset(kGAP)
             make.left.equalTo(kAvatar_Size*2)
-            make.height.equalTo(ScreenHeight/10)
+            make.height.equalTo(ScreenHeight/15)
         }
         nextStapBtn.setTitle("下一步", forState: .Normal)
-//        nextStapBtn.tintColor = UIColor.blueColor()
-        nextStapBtn.backgroundColor = UIColor.blueColor()
+        nextStapBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+        nextStapBtn.backgroundColor = kBlueColor
         nextStapBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        nextStapBtn.titleLabel?.font = UIFont.systemFontOfSize(20)
+        nextStapBtn.titleLabel?.font = UIFont.systemFontOfSize(kTopScaleOfFont)
         nextStapBtn.titleLabel?.textAlignment = .Center
+        nextStapBtn.layer.cornerRadius = 5
+        nextStapBtn.layer.masksToBounds = true
     }
     
     required init?(coder aDecoder: NSCoder) {

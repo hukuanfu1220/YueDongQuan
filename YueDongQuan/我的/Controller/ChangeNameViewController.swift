@@ -18,28 +18,34 @@ class ChangeNameViewController: MainViewController {
         super.viewDidLoad()
         
         reNamefeild.frame = CGRectMake(10, 0, ScreenWidth-20, 44)
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getUserName), name: UITextFieldTextDidChangeNotification, object: nil)
         
      self.view .addSubview(reNamefeild)
    
         reNamefeild.placeholder = "姚明"
        
     }
-
+    //MARK:更改名字
+    func getUserName(fication:NSNotification)  {
+        let updatenameModel = MyInfoModel()
+        let textFeild = fication.object as! UITextField
+        updatenameModel.name = textFeild.text!
+        updatenameModel.uid = NSUserDefaults.standardUserDefaults().objectForKey("uid") as! String
+        let dic = ["VALIDATION_CODE":updatenameModel.VALIDATION_CODE,
+                   "uid":updatenameModel.uid,
+                   "name":updatenameModel.name]
+        MJNetWorkHelper().updatename(updatename, updatenameModel: dic, success: { (responseDic, success) in
+            
+            }) { (error) in
+                
+        }
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

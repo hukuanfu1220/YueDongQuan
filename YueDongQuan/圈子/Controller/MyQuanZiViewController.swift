@@ -17,6 +17,15 @@ class MyQuanZiViewController: MainViewController,UITableViewDelegate,UITableView
 
       self.creatTableView()
     }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.tabBarController?.hidesBottomBarWhenPushed = true
+    }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.tabBarController?.hidesBottomBarWhenPushed = false
+
+    }
     func creatTableView()  {
         tableView = UITableView(frame: CGRectMake(0, 0, ScreenWidth, ScreenHeight), style: .Grouped)
         tableView.delegate = self
@@ -37,7 +46,7 @@ class MyQuanZiViewController: MainViewController,UITableViewDelegate,UITableView
         self.push(new)
     }
  //MARK:表格数据源代理
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
 //            return (dataSources["myQuanZi"]?.count)!
             return 1
@@ -57,7 +66,7 @@ class MyQuanZiViewController: MainViewController,UITableViewDelegate,UITableView
             cell.textLabel?.text = "奥体中心"
             cell.detailTextLabel?.text = "128"
             cell.detailTextLabel?.textColor = UIColor.grayColor()
-            cell.detailTextLabel?.font = UIFont.systemFontOfSize(12)
+            cell.detailTextLabel?.font = UIFont.systemFontOfSize(kSmallScaleOfFont)
             return cell
         }
         else{
@@ -67,7 +76,7 @@ class MyQuanZiViewController: MainViewController,UITableViewDelegate,UITableView
             cell.textLabel?.text = "奥体中心"
             cell.detailTextLabel?.text = "128"
             cell.detailTextLabel?.textColor = UIColor.grayColor()
-            cell.detailTextLabel?.font = UIFont.systemFontOfSize(12)
+            cell.detailTextLabel?.font = UIFont.systemFontOfSize(kSmallScaleOfFont)
             return cell
         }
 //        return cell
@@ -90,29 +99,47 @@ class MyQuanZiViewController: MainViewController,UITableViewDelegate,UITableView
         if section == 0 {
             let headLabel = UILabel(frame: CGRectMake(20, 0, ScreenWidth-20, ScreenHeight/15))
             headLabel.text = "我管理的圈子"
-            headLabel.font = UIFont.systemFontOfSize(12)
+            headLabel.font = UIFont.systemFontOfSize(kSmallScaleOfFont)
             headLabel.textColor = UIColor.grayColor()
             return headLabel
         }
         else{
             let headLabel = UILabel(frame: CGRectMake(20, 0, ScreenWidth-20, ScreenHeight/15))
             headLabel.text = "我加入的圈子"
-            headLabel.font = UIFont.systemFontOfSize(12)
+            headLabel.font = UIFont.systemFontOfSize(kSmallScaleOfFont)
             headLabel.textColor = UIColor.grayColor()
             return headLabel
         }
     }
+    //选中某个圈子发起聊天
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                let chat = ChatViewController()
-                self.push(chat)
+                //融云聊天
+            let chatVC = MJConversationViewController()
+                chatVC.targetId = "1003"
+                chatVC.userName = "热动"
+                chatVC.title = "热动"
+                chatVC.conversationType = .ConversationType_GROUP
+                push(chatVC)
             }
         }
     }
     //MARK:数据来源
     lazy var dataSources:NSMutableDictionary = {
        var dataSources = NSMutableDictionary()
+        
+        let myCircleModel = CircleModel()
+        myCircleModel.uid = NSUserDefaults.standardUserDefaults().objectForKey("uid")as! String
+        let dic = ["VALIDATION_CODE":myCircleModel.VALIDATION_CODE,
+                   "uid":myCircleModel.uid]
+        MJNetWorkHelper().mycircle(mycircle, mycircleModel: dic, success: { (responseDic, success) in
+            
+            }, fail: { (error) in
+                
+        })
+        
         return dataSources
     }()
+
 }

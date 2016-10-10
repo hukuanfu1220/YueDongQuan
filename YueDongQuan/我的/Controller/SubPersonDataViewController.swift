@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SubPersonDataViewController: MainViewController,UITableViewDelegate,UITableViewDataSource {
+class SubPersonDataViewController: MainViewController,UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     var tableView : UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,9 +53,6 @@ class SubPersonDataViewController: MainViewController,UITableViewDelegate,UITabl
             biVcell!.accessoryType = .DisclosureIndicator
             biVcell?.textLabel?.text = "个人头像"
             biVcell?.headImage.backgroundColor = UIColor.greenColor()
-//            headImage.layer.cornerRadius = (biVcell?.accessoryView?.bounds.size.width)!/2
-//            headImage.layer.masksToBounds = true
-           
             return biVcell!
         case 1:
             let array = ["姓名","性别","年龄"]
@@ -96,6 +93,16 @@ class SubPersonDataViewController: MainViewController,UITableViewDelegate,UITabl
         if  indexPath.section == 0 {
             let mjAlertView =  MJAlertView(title: nil, message: nil, cancelButtonTitle: "拍照", sureButtonTitle: "手机选择")
             mjAlertView.show()
+            mjAlertView.clickIndexClosure({ (index) in
+                if index == 1{
+                    //MARK:添加相机
+                    self.addCarema()
+                }
+                if index == 2{
+                    //MARK:打开本地相册
+                    self.openPicLibrary()
+                }
+            })
         }
         if indexPath.section == 1 {
             let changeName = ChangeNameViewController()
@@ -107,14 +114,105 @@ class SubPersonDataViewController: MainViewController,UITableViewDelegate,UITabl
                 sexSelect.show()
                 sexSelect.clickIndexClosure({ (index) in
                     //选择男女
+                    self.changSex(index)
                 })
             }
             if indexPath.row == 2 {
                 let datePiker = MJDatePikerView(title: "出生日期", cancelButtonTitle: "取消", sureButtonTitle: "确定")
                 datePiker.show()
+                datePiker.dismissAlertClosure({ (dateString) in
+                    self.changeBirthday(dateString!)
+                })
             }
          
         }
         
+    }
+    func addCarema()  {
+        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            picker.allowsEditing = true
+            picker.sourceType = .Camera
+            self.presentViewController(picker, animated: true, completion: nil)
+        }else{
+            let alert = UIAlertView(title: nil, message: "没有相机", delegate: self, cancelButtonTitle: "好的")
+            alert.show()
+        }
+    }
+    //拍摄完成后要执行的方法
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        //得到图片
+        let dic = info as NSDictionary
+        let image = dic.objectForKey(UIImagePickerControllerOriginalImage) as! UIImage
+        //图片存入相册
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
+        //MARK:更换头像
+        updateUI()
+        
+    }
+    //点击取消
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    func openPicLibrary()  {
+        //相册是可以用模拟器打开
+        if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            picker.allowsEditing = true
+            //打开相册选择照片
+            picker.sourceType = .PhotoLibrary
+            self.presentViewController(picker, animated: true, completion: nil)
+        }else{
+            let alert = UIAlertView(title: nil, message: "没有相机", delegate: self, cancelButtonTitle: "好的")
+            alert.show()
+        }
+    }
+    func updateUI() {
+        let updateheadModel = MyInfoModel()
+        updateheadModel.uid = NSUserDefaults.standardUserDefaults().objectForKey("uid") as! String
+        updateheadModel.headId = ""
+        let dic = ["VALIDATION_CODE":updateheadModel.VALIDATION_CODE,
+                   "uid":updateheadModel.uid,
+                   "headId":updateheadModel.headId]
+        MJNetWorkHelper().updateHeadImage(updatehead, updateHeadImageModel: dic, success: { (responseDic, success) in
+            
+            }) { (error) in
+                
+        }
+    }
+    //MARK:更改性别
+    func changSex(index:NSInteger) {
+        let changeSexModel = MyInfoModel()
+        if index == 1 {
+            changeSexModel.sex = "男"
+        }else{
+            changeSexModel.sex = "女"
+        }
+        changeSexModel.uid = NSUserDefaults.standardUserDefaults().objectForKey("uid")as! String
+        let dic = ["VALIDATION_CODE":changeSexModel.VALIDATION_CODE,
+                   "uid":changeSexModel.uid,
+                   "sex":changeSexModel.sex]
+        MJNetWorkHelper().updatesex(updatesex, updatesexModel: dic, success: { (responseDic, success) in
+            
+            }) { (error) in
+                
+        }
+    }
+    //MARK:更改出生日期
+    func changeBirthday(dateString:NSString)  {
+        let birthdayModel = MyInfoModel()
+        birthdayModel.birthday = dateString as String
+        birthdayModel.uid = NSUserDefaults.standardUserDefaults().objectForKey("uid")as!String
+        let dic = ["VALIDATION_CODE":birthdayModel.VALIDATION_CODE,
+                   "uid":birthdayModel.uid,
+                   "birthday":birthdayModel.birthday]
+        MJNetWorkHelper().updatebirthday(updatebirthday, updatebirthdayModel: dic, success: { (responseDic, success) in
+            
+            }) { (error) in
+                
+        }
     }
 }
